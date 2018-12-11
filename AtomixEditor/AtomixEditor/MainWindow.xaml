@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AtomixEditor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Atomix Editor" Height="450" Width="800" VerticalAlignment="Center" HorizontalAlignment="Center">
     <Grid>
-        
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF102E40"/>
+                <GradientStop Color="#FF3384B6" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Button Content="Nouvelle map" HorizontalAlignment="Left" Margin="295,106,0,0" VerticalAlignment="Top" Width="190" Height="70" FontSize="14" FontWeight="Bold" Click="Button_Click"/>
+        <Button Content="Charger un map" HorizontalAlignment="Left" Margin="295,239,0,0" VerticalAlignment="Top" Width="190" Height="70" FontSize="14" FontWeight="Bold"/>
     </Grid>
 </Window>
