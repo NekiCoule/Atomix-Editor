@@ -17,8 +17,8 @@
         <Label x:Name="lblHeight" Content="Hauteur :" HorizontalAlignment="Left" Margin="85,149,0,0" VerticalAlignment="Top" Height="32" Width="61"/>
         <Label x:Name="lblTileWidth" Content="Largeur tile :" HorizontalAlignment="Left" Margin="311,101,0,0" VerticalAlignment="Top" Height="32" Width="86"/>
         <Label x:Name="lblTileHeight" Content="Hauteur tile :" HorizontalAlignment="Left" Margin="311,149,0,0" VerticalAlignment="Top" Height="32" Width="86"/>
-        <TextBox x:Name="txtWidth" HorizontalAlignment="Left" Height="23" Margin="151,104,0,0" TextWrapping="Wrap" Text="40" VerticalAlignment="Top" Width="90"/>
-        <TextBox x:Name="txtHeight" HorizontalAlignment="Left" Height="23" Margin="151,152,0,0" TextWrapping="Wrap" Text="24" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="txtWidth" HorizontalAlignment="Left" Height="23" Margin="151,104,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="90"/>
+        <TextBox x:Name="txtHeight" HorizontalAlignment="Left" Height="23" Margin="151,152,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="90"/>
         <TextBox x:Name="txtTileWidth" HorizontalAlignment="Left" Height="23" Margin="396,101,0,0" TextWrapping="Wrap" Text="32" VerticalAlignment="Top" Width="90"/>
         <TextBox x:Name="txtTileHeight" HorizontalAlignment="Left" Height="23" Margin="396,152,0,0" TextWrapping="Wrap" Text="32" VerticalAlignment="Top" Width="90" RenderTransformOrigin="3.046,2.568"/>
         <Button  x:Name="btnOpen" Content="Ouvrir..." HorizontalAlignment="Left" Margin="504,236,0,0" VerticalAlignment="Top" Width="75" Click="btnOpen_Click"/>

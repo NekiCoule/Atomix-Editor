@@ -34,20 +34,20 @@ namespace AtomixEditor
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            string mapWidth;
-            string mapHeight;
-            string tileWidth;
-            string tileHeight;
-            string tileMargin;
-            string tilePadding;
+            int mapWidth;
+            int mapHeight;
+            int tileWidth;
+            int tileHeight;
+            int tileMargin;
+            int tilePadding;
             string tilesetPath;
 
-            mapWidth = txtWidth.Text;
-            mapHeight = txtHeight.Text;
-            tileWidth = txtTileWidth.Text;
-            tileHeight = txtTileHeight.Text;
-            tileMargin = txtMargin.Text;
-            tilePadding= txtPadding.Text;
+            mapWidth = int.Parse(txtWidth.Text);
+            mapHeight = int.Parse(txtHeight.Text);
+            tileWidth = int.Parse(txtTileWidth.Text);
+            tileHeight = int.Parse(txtTileHeight.Text);
+            tileMargin = int.Parse(txtMargin.Text);
+            tilePadding= int.Parse(txtPadding.Text);
             tilesetPath = txtTileset.Text;
 
             System.Windows.MessageBox.Show(
@@ -62,6 +62,7 @@ namespace AtomixEditor
 
             MapWindow Map = new MapWindow();
             Map.Show();
+            Map.CreateGrid(mapWidth, mapHeight, tileWidth, tileHeight, tileMargin, tilePadding, tilesetPath);
             this.Close();
 
         }
