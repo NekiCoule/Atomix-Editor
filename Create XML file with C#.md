@@ -24,11 +24,20 @@ protected void btnValidate_Click(object sender, EventArgs e)
 {
   Tilemap newTilemap = new Tilemap()
 
-  using (StreamWriter xmlWrite = new StreamWriter(newTilemap.path))
-  {
-    XmlSerializer myXmlSerializer = new XmlSerializer(newTilemap.GetType());
-    myXmlSerializer.Serialize(xmlWrite, newTilemap);
-  }
+  StringBuilder sb = new StringBuilder();
+    XmlWriterSettings xws = new XmlWriterSettings();
+    xws.OmitXmlDeclaration = true;
+    xws.Indent = true;
+
+    using (XmlWriter xw = XmlWriter.Create(newTilemap.path, xws))
+    {
+      XDocument doc = new XDocument(
+        new XElement("Child",
+          new XElement("GrandChild", "another content")
+        )
+      );
+      doc.Save(xw);
+    }
 
 
 }
