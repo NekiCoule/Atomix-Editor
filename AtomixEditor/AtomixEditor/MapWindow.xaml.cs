@@ -27,10 +27,12 @@ namespace AtomixEditor
         private int mapTileHeight;
         private int mapTileMargin;
         private int mapTilePadding;
-        private string mapTilesetPath;
+        private string mapTilesetFile;
+        private string mapTilemapName;
+        private string mapTilemapPath;
 
         // Map window constructor
-        public MapWindow(int Width, int Height, int tileWidth, int tileHeight, int tileMargin, int tilePadding, string tilesetPath)
+        public MapWindow(int Width, int Height, int tileWidth, int tileHeight, int tileMargin, int tilePadding, string tilesetFile, string tilemapName, string tilemapPath)
         {
             InitializeComponent();
 
@@ -40,7 +42,9 @@ namespace AtomixEditor
             mapTileHeight = tileHeight;
             mapTileMargin = tileMargin;
             mapTilePadding = tilePadding;
-            mapTilesetPath = tilesetPath;
+            mapTilesetFile = tilesetFile;
+            mapTilemapName = tilemapName;
+            mapTilemapPath = tilemapPath;
 
             int windowWidth = mapWidth * mapTileWidth;
             int windowHeight = mapHeight * mapTileHeight;

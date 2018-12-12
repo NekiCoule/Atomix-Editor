@@ -29,7 +29,14 @@ namespace AtomixEditor
         {
             FileDialog fileDialog = new OpenFileDialog();
             fileDialog.ShowDialog();
-            txtTileset.Text = fileDialog.FileName;
+            txtTilesetFile.Text = fileDialog.FileName;
+        }
+
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        {
+            FolderBrowserDialog folderDialog = new FolderBrowserDialog();
+            folderDialog.ShowDialog();
+            txtTilemapPath.Text = folderDialog.SelectedPath;
         }
 
         private void BtnOK_Click(object sender, RoutedEventArgs e)
@@ -40,7 +47,9 @@ namespace AtomixEditor
             int tileHeight;
             int tileMargin;
             int tilePadding;
-            string tilesetPath;
+            string tilesetFile;
+            string tilemapName;
+            string tilemapPath;
 
             mapWidth = int.Parse(txtWidth.Text);
             mapHeight = int.Parse(txtHeight.Text);
@@ -48,23 +57,30 @@ namespace AtomixEditor
             tileHeight = int.Parse(txtTileHeight.Text);
             tileMargin = int.Parse(txtMargin.Text);
             tilePadding= int.Parse(txtPadding.Text);
-            tilesetPath = txtTileset.Text;
+            tilesetFile = txtTilesetFile.Text;
+            tilemapName = txtTilemapName.Text;
+            tilemapPath = txtTilemapPath.Text;
 
-            /*System.Windows.MessageBox.Show(
+            /*
+            System.Windows.MessageBox.Show(
                 "largeur map : " + mapWidth +
                 "\nhauteur map : " + mapHeight +
                 "\nlargeur tile : " + tileWidth +
                 "\nhauteur tile : " + tileHeight +
                 "\nmargin : " + tileMargin +
                 "\npadding : " + tilePadding +
-                "\nchemin du fichier : " + tilesetPath
-                );*/
+                "\nchemin du fichier : " + tilesetFile +
+                "\nnom du fichier : " + tilemapName +
+                "\nchemin du tilemap : " + tilemapPath
+                );
+            */
 
-            MapWindow Map = new MapWindow(mapWidth, mapHeight, tileWidth, tileHeight, tileMargin, tilePadding, tilesetPath);
+            MapWindow Map = new MapWindow(mapWidth, mapHeight, tileWidth, tileHeight, tileMargin, tilePadding, tilesetFile, tilemapName, tilemapPath);
             Map.Show();
             //Map.CreateGrid(mapWidth, mapHeight, tileWidth, tileHeight, tileMargin, tilePadding, tilesetPath);
             this.Close();
-
         }
+
+        
     }
 }
