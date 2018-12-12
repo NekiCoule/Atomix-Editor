@@ -43,28 +43,7 @@ namespace AtomixEditor
 
         private void BtnOK_Click(object sender, RoutedEventArgs e)
         {
-            int mapWidth;
-            int mapHeight;
-            int tileWidth;
-            int tileHeight;
-            int tileMargin;
-            int tilePadding;
-            string tilesetFile;
-            string tilemapName;
-            string tilemapPath;
-            string tilemapFile;
-
-            mapWidth = int.Parse(txtWidth.Text);
-            mapHeight = int.Parse(txtHeight.Text);
-            tileWidth = int.Parse(txtTileWidth.Text);
-            tileHeight = int.Parse(txtTileHeight.Text);
-            tileMargin = int.Parse(txtMargin.Text);
-            tilePadding= int.Parse(txtPadding.Text);
-            tilesetFile = txtTilesetFile.Text;
-            tilemapName = txtTilemapName.Text;
-            tilemapPath = txtTilemapPath.Text;
-
-            tilemapFile = tilemapPath + @"\" + tilemapName + ".xml";
+            Tilemap theTilemap = new Tilemap(int.Parse(txtWidth.Text), int.Parse(txtHeight.Text), int.Parse(txtTileWidth.Text), int.Parse(txtTileHeight.Text), int.Parse(txtMargin.Text), int.Parse(txtPadding.Text), txtTilemapPath.Text, txtTilemapName.Text, txtTilesetFile.Text);
 
             /*
             System.Windows.MessageBox.Show(
@@ -80,35 +59,15 @@ namespace AtomixEditor
                 );
             */
 
-
-
-
-            XmlWriterSettings docSettings = new XmlWriterSettings();
-            docSettings.OmitXmlDeclaration = true;
-            docSettings.Indent = true;
-
-            using (XmlWriter docInit = XmlWriter.Create(tilemapFile, docSettings))
+            if(theTilemap.initDoc())
             {
-                XDocument doc = new XDocument(
-                    new XElement("map",
-                        new XAttribute("width", mapWidth),
-                        new XAttribute("height", mapHeight),
-                        new XAttribute("tileWidth", tileWidth),
-                        new XAttribute("tileHeight", tileHeight),
-                        new XElement("tileset", 
-                            new XAttribute("name", System.IO.Path.GetFileNameWithoutExtension(tilesetFile)),
-                            new XElement("image", tilesetFile)
-                        )
-                    )
-                   
-                );
-                doc.Save(docInit);
+                MapWindow Map = theTilemap.goToEditor();
+                Map.Show();
+                //Map.CreateGrid(mapWidth, mapHeight, tileWidth, tileHeight, tileMargin, tilePadding, tilesetPath);
+                this.Close();
             }
 
-            MapWindow Map = new MapWindow(mapWidth, mapHeight, tileWidth, tileHeight, tileMargin, tilePadding, tilesetFile, tilemapName, tilemapPath);
-            Map.Show();
-            //Map.CreateGrid(mapWidth, mapHeight, tileWidth, tileHeight, tileMargin, tilePadding, tilesetPath);
-            this.Close();
+            
         }
 
         
