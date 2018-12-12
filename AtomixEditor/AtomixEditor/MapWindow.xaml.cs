@@ -30,6 +30,8 @@ namespace AtomixEditor
         private string mapTilesetFile;
         private string mapTilemapName;
         private string mapTilemapPath;
+        private bool isLeftMouseDown;
+        private bool isRightMouseDown;
 
         // Map window constructor (load map)
         public MapWindow(string tilemapPath)
@@ -114,20 +116,52 @@ namespace AtomixEditor
         /// </summary>
 
         // Click in map window
-        private void OnClick(object sender, MouseButtonEventArgs e)
+        
+
+        private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            int posX;
-            int posY;
+            isLeftMouseDown = true;
+            
+        }
+
+        private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            DrawTile();
+            isLeftMouseDown = false;
+        }
+
+
+
+        private void OnMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            //isRightMouseDown = true;
+            //EraseTile();
+        }
+
+        private void OnMouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            EraseTile();
+            //isRightMouseDown = false;
+        }
+
+        private void OnMouseMove(object sender, MouseEventArgs e)
+        {    
+            if (isLeftMouseDown)
+            {
+                DrawTile();
+            }
+            if (isRightMouseDown)
+            {
+                //EraseTile();
+            }
+        }
+
+        private void DrawTile()
+        {
             int tileX;
             int tileY;
 
-            // Retrieve mouse position
-            posX = (int)Mouse.GetPosition(this).X;
-            posY = (int)Mouse.GetPosition(this).Y;
-
-            // To find which tile is clicked we divide mouse position by tile size
-            tileX = posX / GetMapTileWidth();
-            tileY = posY / GetMapTileHeight();
+            GetTilePosition(out tileX, out tileY);
 
             Image img = new Image
             {
@@ -143,13 +177,77 @@ namespace AtomixEditor
             logo.UriSource = new Uri(directory + "/char_kon.jpg", UriKind.Absolute);
             logo.EndInit();
 
-            img.Source = logo;
+            img.Source = logo;            
             Grid.SetColumn(img, tileX);
             Grid.SetRow(img, tileY);
 
-            myGrid.Children.Add(img);
+            if (myGrid.Children.Count == 0)
+            {
+                myGrid.Children.Add(img);                
+            }
+            else
+            {
+                foreach (UIElement tile in myGrid.Children)
+                {
+                    if (Grid.GetRow(tile) == tileY && Grid.GetColumn(tile) == tileX)
+                    {
+                        if (((System.Windows.Controls.Image)tile).Source.ToString() != logo.UriSource.ToString())
+                        {
+                            myGrid.Children.Add(img);
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        myGrid.Children.Add(img);
+                        break;
+                    }
+                }
+            }
+
             
+
+
+
             //MessageBox.Show("position souris : X="+ posX + " Y="+ posY + " case "+ tileX + "-"+ tileY);
+        }
+
+        private void EraseTile()
+        {
+            int tileX;
+            int tileY;
+
+            GetTilePosition(out tileX, out tileY);
+
+            foreach (UIElement control in myGrid.Children)
+            {
+                if (Grid.GetRow(control) == tileY && Grid.GetColumn(control) == tileX)
+                {
+                    myGrid.Children.Remove(control);
+                    break;
+                }
+            }
+
+        }
+
+        private void GetTilePosition(out int tileX, out int tileY)
+        {
+            int posX;
+            int posY;
+
+            // Retrieve mouse position
+            posX = (int)Mouse.GetPosition(this).X;
+            posY = (int)Mouse.GetPosition(this).Y;
+
+            // To find which tile is clicked we divide mouse position by tile size
+            tileX = posX / GetMapTileWidth();
+            tileY = posY / GetMapTileHeight();
+        }
+
+        private void ResetTile()
+        {
+            // Erase all
+            myGrid.Children.Clear();
         }
     }
 }
