@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace AtomixEditor
 {
@@ -50,6 +52,7 @@ namespace AtomixEditor
             string tilesetFile;
             string tilemapName;
             string tilemapPath;
+            string tilemapFile;
 
             mapWidth = int.Parse(txtWidth.Text);
             mapHeight = int.Parse(txtHeight.Text);
@@ -60,6 +63,8 @@ namespace AtomixEditor
             tilesetFile = txtTilesetFile.Text;
             tilemapName = txtTilemapName.Text;
             tilemapPath = txtTilemapPath.Text;
+
+            tilemapFile = tilemapPath + @"\" + tilemapName + ".xml";
 
             /*
             System.Windows.MessageBox.Show(
@@ -74,6 +79,31 @@ namespace AtomixEditor
                 "\nchemin du tilemap : " + tilemapPath
                 );
             */
+
+
+
+
+            XmlWriterSettings docSettings = new XmlWriterSettings();
+            docSettings.OmitXmlDeclaration = true;
+            docSettings.Indent = true;
+
+            using (XmlWriter docInit = XmlWriter.Create(tilemapFile, docSettings))
+            {
+                XDocument doc = new XDocument(
+                    new XElement("map",
+                        new XAttribute("width", mapWidth),
+                        new XAttribute("height", mapHeight),
+                        new XAttribute("tileWidth", tileWidth),
+                        new XAttribute("tileHeight", tileHeight),
+                        new XElement("tileset", 
+                            new XAttribute("name", System.IO.Path.GetFileNameWithoutExtension(tilesetFile)),
+                            new XElement("image", tilesetFile)
+                        )
+                    )
+                   
+                );
+                doc.Save(docInit);
+            }
 
             MapWindow Map = new MapWindow(mapWidth, mapHeight, tileWidth, tileHeight, tileMargin, tilePadding, tilesetFile, tilemapName, tilemapPath);
             Map.Show();
