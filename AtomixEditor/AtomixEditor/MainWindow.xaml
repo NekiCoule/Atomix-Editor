@@ -13,7 +13,7 @@
                 <GradientStop Color="#FF3384B6" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Button Content="Nouvelle map" HorizontalAlignment="Left" Margin="295,106,0,0" VerticalAlignment="Top" Width="190" Height="70" FontSize="14" FontWeight="Bold" Click="Button_Click"/>
-        <Button Content="Charger un map" HorizontalAlignment="Left" Margin="295,239,0,0" VerticalAlignment="Top" Width="190" Height="70" FontSize="14" FontWeight="Bold"/>
+        <Button x:Name="btnNewMap" Content="Nouvelle map" HorizontalAlignment="Left" Margin="295,106,0,0" VerticalAlignment="Top" Width="190" Height="70" FontSize="14" FontWeight="Bold" Click="BtnNewMap_Click"/>
+        <Button x:Name="btnLoadMap" Content="Charger un map" HorizontalAlignment="Left" Margin="295,239,0,0" VerticalAlignment="Top" Width="190" Height="70" FontSize="14" FontWeight="Bold" Click="BtnLoadMap_Click"/>
     </Grid>
 </Window>

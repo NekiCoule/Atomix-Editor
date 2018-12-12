@@ -31,7 +31,15 @@ namespace AtomixEditor
         private string mapTilemapName;
         private string mapTilemapPath;
 
-        // Map window constructor
+        // Map window constructor (load map)
+        public MapWindow(string tilemapPath)
+        {
+            InitializeComponent();
+
+            MessageBox.Show("chemin tilemap : "+ tilemapPath);
+        }
+
+        // Map window constructor (new map)
         public MapWindow(int Width, int Height, int tileWidth, int tileHeight, int tileMargin, int tilePadding, string tilesetFile, string tilemapName, string tilemapPath)
         {
             InitializeComponent();

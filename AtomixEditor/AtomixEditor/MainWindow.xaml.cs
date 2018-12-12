@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Forms;
 
 namespace AtomixEditor
 {
@@ -25,10 +26,22 @@ namespace AtomixEditor
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BtnNewMap_Click(object sender, RoutedEventArgs e)
         {
             NewMapWindow newMap = new NewMapWindow();           
             newMap.Show();
+            this.Close();
+        }
+
+        private void BtnLoadMap_Click(object sender, RoutedEventArgs e)
+        {
+            FileDialog fileDialog = new OpenFileDialog();
+            fileDialog.ShowDialog();
+
+            MapWindow Map = new MapWindow(fileDialog.FileName);
+            Map.Show();
+            TilemapWindow tilemap = new TilemapWindow();
+            tilemap.Show();
             this.Close();
         }
     }

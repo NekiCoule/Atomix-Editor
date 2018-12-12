@@ -31,7 +31,7 @@
         <TextBox x:Name="txtPadding" HorizontalAlignment="Left" Height="23" Margin="620,152,0,0" TextWrapping="Wrap" Text="2" VerticalAlignment="Top" Width="90" RenderTransformOrigin="3.046,2.568"/>
         <Button  x:Name="btnSave" Content="Enregistrer sous..." HorizontalAlignment="Left" Margin="504,296,0,0" VerticalAlignment="Top" Width="105" Click="BtnSave_Click"/>
         <TextBox x:Name="txtTilemapPath" HorizontalAlignment="Left" Height="19" Margin="243,296,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="228"/>
-        <Label x:Name="lblTilemapPath" Content="Tileset :" HorizontalAlignment="Left" Margin="177,293,0,0" VerticalAlignment="Top" Height="32" Width="61"/>
+        <Label x:Name="lblTilemapPath" Content="Tilemap :" HorizontalAlignment="Left" Margin="177,293,0,0" VerticalAlignment="Top" Height="32" Width="61"/>
         <Label x:Name="lblTilemapName" Content="Nom du fichier :" HorizontalAlignment="Left" Margin="133,251,0,0" VerticalAlignment="Top" Height="32" Width="105"/>
         <TextBox x:Name="txtTilemapName" HorizontalAlignment="Left" Height="19" Margin="243,254,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="228"/>
     </Grid>
