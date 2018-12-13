@@ -21,7 +21,6 @@ namespace AtomixEditor
     {
         private Tilemap theTilemap;
         private MapWindow theMap;
-        private double scaleCoef;
 
         public TilemapWindow(MapWindow map, Tilemap tilemap)
         {
@@ -42,19 +41,14 @@ namespace AtomixEditor
             {
                 Width = tileset.PixelWidth,
                 Height = tileset.PixelHeight
-            };
-
-            scaleCoef = tileset.PixelWidth / Width;            
+            };    
 
             img.Source = tileset;
-            //Grid.SetColumn(img, tileX);
-            //Grid.SetRow(img, tileY);
 
             this.tilesetGrid.Children.Add(img);
 
             this.Height = tileset.PixelHeight + 35;
             this.Width = tileset.PixelWidth + 15;
-
             this.Left = SystemParameters.WorkArea.Width - this.Width;
             this.Top = (SystemParameters.WorkArea.Bottom - this.Height) / 2;
         }
@@ -75,19 +69,11 @@ namespace AtomixEditor
                 Height = tile.PixelHeight
             };
 
-            scaleCoef = tile.PixelWidth / Width;
-
             img.Source = tile;
             img.Name = "X" + tileX + "Y" + tileY;
 
-
             theMap.SetSelectedTile(img);
             theMap.SetSelectedRect(tile.SourceRect);
-            //Grid.SetColumn(img, tileX);
-            //Grid.SetRow(img, tileY);
-
-            //this.tilesetGrid.Children.Add(img);
-            //MessageBox.Show("posX = " + tileX + "posY = " + tileY);
         }
 
         private void GetTilePosition(out int tileX, out int tileY)

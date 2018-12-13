@@ -41,7 +41,6 @@ namespace AtomixEditor
             InitializeComponent();
             Left = 0;
             Top = 0;
-            //MessageBox.Show("chemin tilemap : "+ tilemapPath);
         }
 
         // Map window constructor (new map)
@@ -75,9 +74,8 @@ namespace AtomixEditor
                 VerticalAlignment = VerticalAlignment.Top,
                 ShowGridLines = true
             };
-            //myGrid.Background = new SolidColorBrush(Color.FromArgb(0xff, 0xff, 0x90, 0x90));
 
-            // Define the columns
+            // Create the grid columns
             for (int i = 0; i < mapWidth; i++)
             {
                 ColumnDefinition Column = new ColumnDefinition
@@ -86,7 +84,7 @@ namespace AtomixEditor
                 };
                 myGrid.ColumnDefinitions.Add(Column);
             }
-            // Define the rows
+            // Create the grid rows
             for (int j = 0; j < mapHeight; j++)
             {
                 RowDefinition Row = new RowDefinition
@@ -125,23 +123,28 @@ namespace AtomixEditor
         /// </summary>
 
         // Click in map window     
+
+        // If click down, we will call DrawTile on mouse move
         private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             isLeftMouseDown = true;            
         }
 
+        // If click release we draw a last tile and disable draw
         private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             DrawTile();
             isLeftMouseDown = false;
         }
 
+        // If click down, we will call ERaseTile on mouse move
         private void OnMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             isRightMouseDown = true;
             EraseTile();
         }
 
+        // If click release we erase a last tile and disable erase
         private void OnMouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             EraseTile();
@@ -160,6 +163,7 @@ namespace AtomixEditor
             }
         }
 
+        // draws a tile depending on mouse location and tile selected in tileset
         private void DrawTile()
         {
             bool draw = true;
@@ -175,6 +179,7 @@ namespace AtomixEditor
             // Get current folder
             string directory = System.IO.Directory.GetCurrentDirectory();
 
+            // Create a bitmad with selected tiled
             BitmapImage logo = new BitmapImage();
             logo.BeginInit();
             logo.UriSource = new Uri(GetSelectedTile().Source.ToString(), UriKind.Absolute);
@@ -182,6 +187,7 @@ namespace AtomixEditor
             logo.EndInit();
 
             img.Source = logo;
+            img.Name = GetSelectedTile().Name;
 
             //img = GetSelectedTile();
 
@@ -195,14 +201,13 @@ namespace AtomixEditor
                 if (Grid.GetRow(tile) == tileY && Grid.GetColumn(tile) == tileX)                
                 {
                     // if different image we delete the current one & print the new one
-                    //if (((Image)tile).Source.ToString() != logo.UriSource.ToString())
                     if (((Image)tile).Name.ToString() != img.Name.ToString())
                     {
-                        myGrid.Children.Remove(tile);
-                        myGrid.Children.Add(img);
+                        draw = false;
+                        break;
                     }
-                draw = false;
-                break;
+                    draw = false;
+                    break;
                 }                
             }
             

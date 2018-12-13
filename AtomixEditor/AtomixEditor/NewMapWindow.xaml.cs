@@ -27,6 +27,7 @@ namespace AtomixEditor
             InitializeComponent();            
         }
 
+        // To choose a tileset
         private void BtnOpen_Click(object sender, RoutedEventArgs e)
         {
             FileDialog fileDialog = new OpenFileDialog();
@@ -34,6 +35,7 @@ namespace AtomixEditor
             txtTilesetFile.Text = fileDialog.FileName;
         }
 
+        // To select tilemap save folder
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             FolderBrowserDialog folderDialog = new FolderBrowserDialog();
@@ -41,37 +43,35 @@ namespace AtomixEditor
             txtTilemapPath.Text = folderDialog.SelectedPath;
         }
 
+        // Validates user inputs, creates a tilemap and open editor windows (map & tileset)
         private void BtnOK_Click(object sender, RoutedEventArgs e)
         {
-            Tilemap theTilemap = new Tilemap(int.Parse(txtWidth.Text), int.Parse(txtHeight.Text), int.Parse(txtTileWidth.Text), int.Parse(txtTileHeight.Text), txtTilemapPath.Text, txtTilemapName.Text, int.Parse(txtElementWidth.Text), int.Parse(txtElementHeight.Text), int.Parse(txtMargin.Text), int.Parse(txtSpacing.Text), txtTilesetFile.Text);
-
-            /*
-            System.Windows.MessageBox.Show(
-                "largeur map : " + mapWidth +
-                "\nhauteur map : " + mapHeight +
-                "\nlargeur tile : " + tileWidth +
-                "\nhauteur tile : " + tileHeight +
-                "\nmargin : " + tileMargin +
-                "\npadding : " + tilePadding +
-                "\nchemin du fichier : " + tilesetFile +
-                "\nnom du fichier : " + tilemapName +
-                "\nchemin du tilemap : " + tilemapPath
-                );
-            */
-
-            if(theTilemap.initDoc())
+            if(txtWidth.Text != "" && txtHeight.Text != "" && txtTileWidth.Text != "" &&
+            txtTileHeight.Text != "" && txtTilemapPath.Text != "" && txtTilemapName.Text != "" &&
+            txtElementWidth.Text != "" && txtElementHeight.Text != "" && txtMargin.Text != "" && 
+            txtSpacing.Text != "" && txtTilesetFile.Text != "")
             {
-                MapWindow Map = theTilemap.goToEditor();
-                Map.Show();
-                TilemapWindow tilemap = new TilemapWindow(Map, theTilemap);                
-                tilemap.Show();
-                //Map.CreateGrid(mapWidth, mapHeight, tileWidth, tileHeight, tileMargin, tilePadding, tilesetPath);
-                this.Close();
+                Tilemap theTilemap = new Tilemap
+                (
+                    int.Parse(txtWidth.Text), int.Parse(txtHeight.Text), int.Parse(txtTileWidth.Text),
+                    int.Parse(txtTileHeight.Text), txtTilemapPath.Text, txtTilemapName.Text,
+                    int.Parse(txtElementWidth.Text), int.Parse(txtElementHeight.Text),
+                    int.Parse(txtMargin.Text), int.Parse(txtSpacing.Text), txtTilesetFile.Text
+                );
+
+                if (theTilemap.initDoc())
+                {
+                    MapWindow Map = theTilemap.goToEditor();
+                    Map.Show();
+                    TilemapWindow tilemap = new TilemapWindow(Map, theTilemap);
+                    tilemap.Show();
+                    this.Close();
+                }
             }
-
-            
-        }
-
-        
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("Merci de renseigner tous les champs");
+            }
+        }        
     }
 }
