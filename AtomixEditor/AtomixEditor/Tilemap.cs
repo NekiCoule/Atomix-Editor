@@ -163,23 +163,16 @@ namespace AtomixEditor
 
         public MapWindow goToEditor()
         {
-            MapWindow Map = new MapWindow(mapWidth, mapHeight, tileWidth, tileHeight, tileset.getElementMargin(), tileset.getElementSpacing(), tileset.getTilesetFile(), tilemapName, tilemapPath);
+            MapWindow Map = new MapWindow(this, tileset);
             return Map;
         }
 
-        public string GetTilesetPath()
-        {
-            return tileset.getTilesetFile();
-        }
-
-        public int GetTileWidth()
-        {
-            return tileWidth;
-        }
-
-        public int GetTileHeight()
-        {
-            return tileHeight;
-        }
+        public int GetMapWidth()        {   return mapWidth;    }
+        public int GetMapHeight()       {   return mapHeight;   }
+        public string GetTilemapPath()  {   return tilemapPath; }
+        public string GetTilemapName()  {   return tilemapName; }
+        public int GetTileWidth()       {   return tileWidth;   }
+        public int GetTileHeight()      {   return tileHeight;  }
+        public Tileset GetTileset()     {   return tileset;     }
     }
 }

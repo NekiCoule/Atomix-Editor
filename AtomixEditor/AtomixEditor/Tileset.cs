@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AtomixEditor
 {
-    class Tileset
+    public class Tileset
     {
         private int elementWidth;
         private int elementHeight;

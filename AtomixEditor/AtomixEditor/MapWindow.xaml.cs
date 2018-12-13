@@ -26,7 +26,7 @@ namespace AtomixEditor
         private int mapTileWidth;
         private int mapTileHeight;
         private int mapTileMargin;
-        private int mapTilePadding;
+        private int mapTileSpacing;
         private string mapTilesetFile;
         private string mapTilemapName;
         private string mapTilemapPath;
@@ -44,19 +44,19 @@ namespace AtomixEditor
         }
 
         // Map window constructor (new map)
-        public MapWindow(int Width, int Height, int tileWidth, int tileHeight, int tileMargin, int tilePadding, string tilesetFile, string tilemapName, string tilemapPath)
+        public MapWindow(Tilemap myTilemap, Tileset myTileset)
         {
-            InitializeComponent();            
+            InitializeComponent();
 
-            mapWidth = Width;
-            mapHeight = Height;
-            mapTileWidth = tileWidth;
-            mapTileHeight = tileHeight;
-            mapTileMargin = tileMargin;
-            mapTilePadding = tilePadding;
-            mapTilesetFile = tilesetFile;
-            mapTilemapName = tilemapName;
-            mapTilemapPath = tilemapPath;
+            mapWidth = myTilemap.GetMapWidth();
+            mapHeight = myTilemap.GetMapHeight();
+            mapTileWidth = myTilemap.GetTileWidth();
+            mapTileHeight = myTilemap.GetTileHeight();
+            mapTilemapName = myTilemap.GetTilemapName();
+            mapTilemapPath = myTilemap.GetTilemapPath();
+            mapTileMargin = myTileset.getElementMargin();
+            mapTileSpacing = myTileset.getElementSpacing();
+            mapTilesetFile = myTileset.getTilesetFile();            
 
             int windowWidth = mapWidth * mapTileWidth;
             int windowHeight = mapHeight * mapTileHeight;
@@ -99,23 +99,7 @@ namespace AtomixEditor
 
             // update location of the window
             this.Left = 0;
-            this.Top = (SystemParameters.WorkArea.Bottom - this.Height) / 2;
-
-           
-        }      
-
-
-        /// <summary>
-        ///  Getters
-        /// </summary>
-        private int GetMapTileWidth()
-        {
-            return this.mapTileWidth;
-        }
-
-        private int GetMapTileHeight()
-        {
-            return this.mapTileHeight;
+            this.Top = (SystemParameters.WorkArea.Bottom - this.Height) / 2;           
         }
 
         /// <summary>
@@ -169,7 +153,7 @@ namespace AtomixEditor
             bool draw = true;
 
             GetTilePosition(out int tileX, out int tileY);
-
+            
             Image img = new Image
             {
                 Width = mapTileWidth,
@@ -243,8 +227,8 @@ namespace AtomixEditor
             posY = (int)Mouse.GetPosition(this).Y;
 
             // To find which tile is clicked we divide mouse position by tile size
-            tileX = posX / GetMapTileWidth();
-            tileY = posY / GetMapTileHeight();
+            tileX = posX / mapTileWidth;
+            tileY = posY / mapTileHeight;            
         }
 
         // Erase all

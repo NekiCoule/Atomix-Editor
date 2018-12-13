@@ -19,14 +19,14 @@ namespace AtomixEditor
     /// </summary>
     public partial class TilemapWindow : Window
     {
-        private Tilemap theTilemap;
+        private Tileset theTileset;
         private MapWindow theMap;
 
-        public TilemapWindow(MapWindow map, Tilemap tilemap)
+        public TilemapWindow(MapWindow map, Tileset myTileset)
         {
             InitializeComponent();           
-
-            theTilemap = tilemap;
+            
+            theTileset = myTileset;
             theMap = map;
 
             // load tileset into the editor right-side window
@@ -34,7 +34,7 @@ namespace AtomixEditor
 
             BitmapImage tileset = new BitmapImage();
             tileset.BeginInit();
-            tileset.UriSource = new Uri(theTilemap.GetTilesetPath(), UriKind.Absolute);     
+            tileset.UriSource = new Uri(theTileset.getTilesetFile(), UriKind.Absolute);     
             tileset.EndInit();
 
             Image img = new Image
@@ -57,10 +57,13 @@ namespace AtomixEditor
         {
             GetTilePosition(out int tileX, out int tileY);
 
+            int tileHeight = theTileset.getElementHeight();
+            int tileWidth = theTileset.getElementWidth();
+
             BitmapImage tile = new BitmapImage();
             tile.BeginInit();
-            tile.UriSource = new Uri(theTilemap.GetTilesetPath(), UriKind.Absolute);
-            tile.SourceRect = new Int32Rect(tileX*32, tileY*32, 32, 32);
+            tile.UriSource = new Uri(theTileset.getTilesetFile(), UriKind.Absolute);
+            tile.SourceRect = new Int32Rect(tileX * tileWidth, tileY * tileHeight , tileWidth, tileHeight);
             tile.EndInit();
 
             Image img = new Image
@@ -86,8 +89,8 @@ namespace AtomixEditor
             posY = (int)Mouse.GetPosition(this).Y;
 
             // To find which tile is clicked we divide mouse position by tile size
-            tileX = posX / theTilemap.GetTileWidth();
-            tileY = posY / theTilemap.GetTileHeight();
+            tileX = posX / theTileset.getElementWidth();
+            tileY = posY / theTileset.getElementHeight();
         }
     }
 }

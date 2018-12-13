@@ -63,7 +63,7 @@ namespace AtomixEditor
                 {
                     MapWindow Map = theTilemap.goToEditor();
                     Map.Show();
-                    TilemapWindow tilemap = new TilemapWindow(Map, theTilemap);
+                    TilemapWindow tilemap = new TilemapWindow(Map, theTilemap.GetTileset());
                     tilemap.Show();
                     this.Close();
                 }
