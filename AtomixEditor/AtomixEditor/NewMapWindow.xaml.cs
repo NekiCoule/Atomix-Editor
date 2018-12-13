@@ -65,6 +65,8 @@ namespace AtomixEditor
                     Map.Show();
                     TilemapWindow tilemap = new TilemapWindow(Map, theTilemap.GetTileset());
                     tilemap.Show();
+                    ToolsWindow tools = new ToolsWindow(Map);
+                    tools.Show();
                     this.Close();
                 }
             }

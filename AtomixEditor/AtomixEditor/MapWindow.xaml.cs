@@ -232,7 +232,7 @@ namespace AtomixEditor
         }
 
         // Erase all
-        private void ResetTile()
+        public void ResetMap()
         {            
             myGrid.Children.Clear();
         }

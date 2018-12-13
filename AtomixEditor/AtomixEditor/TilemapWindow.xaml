@@ -6,7 +6,11 @@
         xmlns:local="clr-namespace:AtomixEditor"
         mc:Ignorable="d"
         Title="TilemapWindow" Height="320" Width="320" WindowStartupLocation="Manual">
-    <Grid x:Name="tilesetGrid" MouseLeftButtonUp="OnMouseLeftButtonUp">
-        
+
+    <Grid x:Name="tilesetGrid" MouseLeftButtonUp="OnMouseLeftButtonUp">     
+
     </Grid>
+
+
+
 </Window>
