@@ -1,8 +1,8 @@
 <map  width="" height="" tilewidth="" tileheight="">
-  <tileset name="" tilewidth="" tileheight="" spacing="" margin="" tilecount="" columns="">
+  <tileset name="" elementwidth="" elementheight="" margin="" spacing="">
     <image source="" width="" height=""/>
  </tileset>
- <layer id="1" name="Tile Layer 1" width="" height="">
+ <layer id="1" name="Tile Layer 1">
   <data>
     <tile col="" row="" id=""/>
     ...
