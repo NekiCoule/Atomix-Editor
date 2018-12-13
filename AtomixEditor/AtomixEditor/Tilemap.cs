@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -131,6 +133,31 @@ namespace AtomixEditor
                 ); //end of doc
                 doc.Save(docInit);
             }
+            return true;
+        }
+
+        public bool saveMap(Grid myGrid)
+        {
+            string tilemapFile = tilemapPath + @"\" + tilemapName + ".xml";
+
+            initDoc();
+
+            XDocument doc = XDocument.Load(tilemapFile);
+
+            foreach (UIElement control in myGrid.Children)
+            {
+                doc.Element("data").Add(
+                    new XElement("Tile",
+                        new XAttribute("row", Grid.GetRow(control)),
+                        new XAttribute("col", Grid.GetColumn(control)),
+                        new XAttribute("id", 0)
+                    ) //end tile
+                ); //end data
+            }
+
+            doc.Save(tilemapFile);
+
+
             return true;
         }
 
