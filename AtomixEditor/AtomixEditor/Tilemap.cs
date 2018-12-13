@@ -14,11 +14,9 @@ namespace AtomixEditor
         private int mapHeight;
         private int tileWidth;
         private int tileHeight;
-        private int tileMargin;
-        private int tilePadding;
         private string tilemapPath;
         private string tilemapName;
-        private string tilesetFile;
+        private Tileset tileset;
 
 
         public Tilemap()
@@ -27,26 +25,25 @@ namespace AtomixEditor
             mapHeight = 0;
             tileWidth = 0;
             tileHeight = 0;
-            tileMargin = 0;
-            tilePadding = 0;
             tilemapPath = "";
             tilemapName = "";
-            tilesetFile = "";
+            tileset = new Tileset();
         }
 
-        public Tilemap(int myMapWidth, int myMapHeight, int myTileWidth, int myTileHeight, int myTileMargin, int myTilePadding, string myTilemapPath, string myTilemapName, string myTilesetFile)
+        public Tilemap(int myMapWidth, int myMapHeight, int myTileWidth, int myTileHeight, string myTilemapPath, string myTilemapName, int myElementWidth, int myElementHeight, int myElementMargin, int myElementSpacing, string myTilesetFile)
         {
             mapWidth = myMapWidth;
             mapHeight = myMapHeight;
             tileWidth = myTileWidth;
             tileHeight = myTileHeight;
-            tileMargin = myTileMargin;
-            tilePadding = myTilePadding;
             tilemapPath = myTilemapPath;
             tilemapName = myTilemapName;
-            tilesetFile = myTilesetFile;
+            tileset = new Tileset(myElementWidth, myElementHeight, myElementMargin, myElementSpacing, myTilesetFile);
 
         }
+
+        // Destructor
+        ~Tilemap(){}
 
         // Name: initDoc
         // Parameters: None
@@ -70,12 +67,23 @@ namespace AtomixEditor
                         new XAttribute("tileWidth", tileWidth),
                         new XAttribute("tileHeight", tileHeight),
                         new XElement("tileset",
-                            new XAttribute("name", System.IO.Path.GetFileNameWithoutExtension(tilesetFile)),
-                            new XElement("image", tilesetFile)
-                        )
-                    )
+                            new XAttribute("name", System.IO.Path.GetFileNameWithoutExtension(tileset.getTilesetFile())),
+                            new XAttribute("elementwidth", tileset.getElementWidth()),
+                            new XAttribute("elementheight", tileset.getElementHeight()),
+                            new XAttribute("margin", tileset.getElementMargin()),
+                            new XAttribute("spacing", tileset.getElementSpacing()),
+                            new XElement("image", 
+                                new XAttribute("source", tileset.getTilesetFile())
+                            ) //end image
+                        ), //end tileset
+                        new XElement("layer",
+                            new XAttribute("id", 1),
+                            new XAttribute("name", "Layer 1"),
+                            new XElement("data")
+                        ) //end layer
+                    ) //end map
 
-                );
+                ); //end of doc
                 doc.Save(docInit);
             }
             return true;
@@ -104,12 +112,23 @@ namespace AtomixEditor
                         new XAttribute("tileWidth", tileWidth),
                         new XAttribute("tileHeight", tileHeight),
                         new XElement("tileset",
-                            new XAttribute("name", System.IO.Path.GetFileNameWithoutExtension(tilesetFile)),
-                            new XElement("image", tilesetFile)
-                        )
-                    )
+                            new XAttribute("name", System.IO.Path.GetFileNameWithoutExtension(tileset.getTilesetFile())),
+                            new XAttribute("elementwidth", tileset.getElementWidth()),
+                            new XAttribute("elementheight", tileset.getElementHeight()),
+                            new XAttribute("margin", tileset.getElementMargin()),
+                            new XAttribute("spacing", tileset.getElementSpacing()),
+                            new XElement("image",
+                                new XAttribute("source", tileset.getTilesetFile())
+                            ) //end image
+                        ), //end tileset
+                        new XElement("layer",
+                            new XAttribute("id", 1),
+                            new XAttribute("name", "Layer 1"),
+                            new XElement("data")
+                        ) //end layer
+                    ) //end map
 
-                );
+                ); //end of doc
                 doc.Save(docInit);
             }
             return true;
@@ -117,7 +136,7 @@ namespace AtomixEditor
 
         public MapWindow goToEditor()
         {
-            MapWindow Map = new MapWindow(mapWidth, mapHeight, tileWidth, tileHeight, tileMargin, tilePadding, tilesetFile, tilemapName, tilemapPath);
+            MapWindow Map = new MapWindow(mapWidth, mapHeight, tileWidth, tileHeight, tileset.getElementMargin(), tileset.getElementSpacing(), tileset.getTilesetFile(), tilemapName, tilemapPath);
             return Map;
         }
     }

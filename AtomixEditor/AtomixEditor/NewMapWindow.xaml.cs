@@ -43,7 +43,7 @@ namespace AtomixEditor
 
         private void BtnOK_Click(object sender, RoutedEventArgs e)
         {
-            Tilemap theTilemap = new Tilemap(int.Parse(txtWidth.Text), int.Parse(txtHeight.Text), int.Parse(txtTileWidth.Text), int.Parse(txtTileHeight.Text), int.Parse(txtMargin.Text), int.Parse(txtPadding.Text), txtTilemapPath.Text, txtTilemapName.Text, txtTilesetFile.Text);
+            Tilemap theTilemap = new Tilemap(int.Parse(txtWidth.Text), int.Parse(txtHeight.Text), int.Parse(txtTileWidth.Text), int.Parse(txtTileHeight.Text), txtTilemapPath.Text, txtTilemapName.Text, int.Parse(txtElementWidth.Text), int.Parse(txtElementHeight.Text), int.Parse(txtMargin.Text), int.Parse(txtSpacing.Text), txtTilesetFile.Text);
 
             /*
             System.Windows.MessageBox.Show(
