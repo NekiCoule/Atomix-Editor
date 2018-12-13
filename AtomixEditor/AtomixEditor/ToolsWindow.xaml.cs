@@ -25,7 +25,6 @@ namespace AtomixEditor
         public ToolsWindow(MapWindow myMap, Tilemap myTilemap)
         {
             InitializeComponent();
-
             theMap = myMap;
             map = myTilemap;
         }

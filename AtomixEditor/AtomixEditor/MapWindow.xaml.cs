@@ -145,7 +145,7 @@ namespace AtomixEditor
             };
 
             // Get current folder
-            string directory = System.IO.Directory.GetCurrentDirectory();
+            string directory = System.IO.Directory.GetCurrentDirectory();            
 
             // Create a bitmad with selected tiled
             BitmapImage logo = new BitmapImage();

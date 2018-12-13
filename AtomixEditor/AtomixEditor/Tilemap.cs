@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -143,7 +143,9 @@ namespace AtomixEditor
             initDoc();
 
             XDocument doc = XDocument.Load(tilemapFile);
-            XNamespace name = doc.Root.GetDefaultNamespace();
+            XElement map = doc.Element("map");
+            XElement layer = map.Element("layer");
+            XElement data = layer.Element("data");
 
             foreach (UIElement control in myGrid.Children)
             {
@@ -154,7 +156,7 @@ namespace AtomixEditor
                     new XAttribute("id", ((Image)control).Name.ToString())
                 ); //end tile
 
-                doc.Element(name + "data").Add(tile);
+                data.Add(tile);
 
             }
 
