@@ -144,13 +144,15 @@ namespace AtomixEditor
 
             XDocument doc = XDocument.Load(tilemapFile);
 
+
             foreach (UIElement control in myGrid.Children)
             {
+
                 doc.Element("data").Add(
                     new XElement("Tile",
                         new XAttribute("row", Grid.GetRow(control)),
                         new XAttribute("col", Grid.GetColumn(control)),
-                        new XAttribute("id", 0)
+                        new XAttribute("id", ((Image)control).Name.ToString())
                     ) //end tile
                 ); //end data
             }
@@ -163,16 +165,16 @@ namespace AtomixEditor
 
         public MapWindow goToEditor()
         {
-            MapWindow Map = new MapWindow(this, tileset);
+            MapWindow Map = new MapWindow(this);
             return Map;
         }
 
-        public int GetMapWidth()        {   return mapWidth;    }
-        public int GetMapHeight()       {   return mapHeight;   }
-        public string GetTilemapPath()  {   return tilemapPath; }
-        public string GetTilemapName()  {   return tilemapName; }
-        public int GetTileWidth()       {   return tileWidth;   }
-        public int GetTileHeight()      {   return tileHeight;  }
-        public Tileset GetTileset()     {   return tileset;     }
+        public int getMapWidth()        {   return mapWidth;    }
+        public int getMapHeight()       {   return mapHeight;   }
+        public string getTilemapPath()  {   return tilemapPath; }
+        public string getTilemapName()  {   return tilemapName; }
+        public int getTileWidth()       {   return tileWidth;   }
+        public int getTileHeight()      {   return tileHeight;  }
+        public Tileset getTileset()     {   return tileset;     }
     }
 }

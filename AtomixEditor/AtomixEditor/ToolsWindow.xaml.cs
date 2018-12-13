@@ -20,12 +20,14 @@ namespace AtomixEditor
     public partial class ToolsWindow : Window
     {
         private MapWindow theMap;
+        private Tilemap map;
 
-        public ToolsWindow(MapWindow myMap)
+        public ToolsWindow(MapWindow myMap, Tilemap myTilemap)
         {
             InitializeComponent();
 
             theMap = myMap;
+            map = myTilemap;
         }
 
         private void BtnResetClick(object sender, RoutedEventArgs e)
@@ -37,13 +39,13 @@ namespace AtomixEditor
         // TODO charger info dans XML
         private void BtnSaveMapClick(object sender, RoutedEventArgs e)
         {
-
+            if (map.saveMap(MapWindow.getMapGrid())) { }
         }
 
         // TODO recharger image Tileset
         private void BtnLoadTilesetClick(object sender, RoutedEventArgs e)
         {
-
+            
         }
     }
 }

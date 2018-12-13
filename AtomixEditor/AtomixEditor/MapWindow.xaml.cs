@@ -20,16 +20,8 @@ namespace AtomixEditor
 
     public partial class MapWindow : Window
     {
-        public Grid myGrid;
-        private int mapWidth;
-        private int mapHeight;
-        private int mapTileWidth;
-        private int mapTileHeight;
-        private int mapTileMargin;
-        private int mapTileSpacing;
-        private string mapTilesetFile;
-        private string mapTilemapName;
-        private string mapTilemapPath;
+        private static Grid myGrid;
+        private Tilemap map;
         private bool isLeftMouseDown;
         private bool isRightMouseDown;
         private Image selectedTile;
@@ -44,22 +36,14 @@ namespace AtomixEditor
         }
 
         // Map window constructor (new map)
-        public MapWindow(Tilemap myTilemap, Tileset myTileset)
+        public MapWindow(Tilemap myTilemap)
         {
             InitializeComponent();
 
-            mapWidth = myTilemap.GetMapWidth();
-            mapHeight = myTilemap.GetMapHeight();
-            mapTileWidth = myTilemap.GetTileWidth();
-            mapTileHeight = myTilemap.GetTileHeight();
-            mapTilemapName = myTilemap.GetTilemapName();
-            mapTilemapPath = myTilemap.GetTilemapPath();
-            mapTileMargin = myTileset.getElementMargin();
-            mapTileSpacing = myTileset.getElementSpacing();
-            mapTilesetFile = myTileset.getTilesetFile();            
+            map = myTilemap;         
 
-            int windowWidth = mapWidth * mapTileWidth;
-            int windowHeight = mapHeight * mapTileHeight;
+            int windowWidth = myTilemap.getMapWidth() * myTilemap.getTileWidth();
+            int windowHeight = myTilemap.getMapHeight() * myTilemap.getTileHeight();
             
 
             // Define window size (add some pixels for width and height for the grid to fit the screen)
@@ -76,20 +60,20 @@ namespace AtomixEditor
             };
 
             // Create the grid columns
-            for (int i = 0; i < mapWidth; i++)
+            for (int i = 0; i < map.getMapWidth(); i++)
             {
                 ColumnDefinition Column = new ColumnDefinition
                 {
-                    Width = new GridLength(mapTileWidth, GridUnitType.Pixel)
+                    Width = new GridLength(map.getTileWidth(), GridUnitType.Pixel)
                 };
                 myGrid.ColumnDefinitions.Add(Column);
             }
             // Create the grid rows
-            for (int j = 0; j < mapHeight; j++)
+            for (int j = 0; j < map.getMapHeight(); j++)
             {
                 RowDefinition Row = new RowDefinition
                 {
-                    Height = new GridLength(mapTileHeight, GridUnitType.Pixel)
+                    Height = new GridLength(map.getTileHeight(), GridUnitType.Pixel)
                 };
                 myGrid.RowDefinitions.Add(Row);
             }
@@ -156,8 +140,8 @@ namespace AtomixEditor
             
             Image img = new Image
             {
-                Width = mapTileWidth,
-                Height = mapTileHeight
+                Width = map.getTileWidth(),
+                Height = map.getTileHeight()
             };
 
             // Get current folder
@@ -227,8 +211,8 @@ namespace AtomixEditor
             posY = (int)Mouse.GetPosition(this).Y;
 
             // To find which tile is clicked we divide mouse position by tile size
-            tileX = posX / mapTileWidth;
-            tileY = posY / mapTileHeight;            
+            tileX = posX / map.getTileWidth();
+            tileY = posY / map.getTileHeight();            
         }
 
         // Erase all
@@ -255,6 +239,11 @@ namespace AtomixEditor
         public Int32Rect GetSelectedRect()
         {
             return selectedRect;
+        }
+
+        public static Grid getMapGrid()
+        {
+            return myGrid;
         }
     }
 }
