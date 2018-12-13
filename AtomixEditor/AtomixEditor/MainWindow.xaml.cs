@@ -40,8 +40,8 @@ namespace AtomixEditor
 
             MapWindow Map = new MapWindow(fileDialog.FileName);
             Map.Show();
-            TilemapWindow tilemap = new TilemapWindow();
-            tilemap.Show();
+            //TilemapWindow tilemap = new TilemapWindow();
+            //tilemap.Show();
             this.Close();
         }
     }

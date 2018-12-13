@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace AtomixEditor
 {
-    class Tilemap
+    public class Tilemap
     {
         private int mapWidth;
         private int mapHeight;
@@ -45,7 +45,6 @@ namespace AtomixEditor
             tilemapPath = myTilemapPath;
             tilemapName = myTilemapName;
             tilesetFile = myTilesetFile;
-
         }
 
         // Name: initDoc
@@ -119,6 +118,21 @@ namespace AtomixEditor
         {
             MapWindow Map = new MapWindow(mapWidth, mapHeight, tileWidth, tileHeight, tileMargin, tilePadding, tilesetFile, tilemapName, tilemapPath);
             return Map;
+        }
+
+        public string GetTilesetPath()
+        {
+            return tilesetFile;
+        }
+
+        public int GetTileWidth()
+        {
+            return tileWidth;
+        }
+
+        public int GetTileHeight()
+        {
+            return tileHeight;
         }
     }
 }

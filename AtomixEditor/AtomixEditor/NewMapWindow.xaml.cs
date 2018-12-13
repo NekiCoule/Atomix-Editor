@@ -63,6 +63,8 @@ namespace AtomixEditor
             {
                 MapWindow Map = theTilemap.goToEditor();
                 Map.Show();
+                TilemapWindow tilemap = new TilemapWindow(Map, theTilemap);                
+                tilemap.Show();
                 //Map.CreateGrid(mapWidth, mapHeight, tileWidth, tileHeight, tileMargin, tilePadding, tilesetPath);
                 this.Close();
             }

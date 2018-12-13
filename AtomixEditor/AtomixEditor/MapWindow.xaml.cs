@@ -32,18 +32,22 @@ namespace AtomixEditor
         private string mapTilemapPath;
         private bool isLeftMouseDown;
         private bool isRightMouseDown;
+        private Image selectedTile;
+        private Int32Rect selectedRect;
 
         // Map window constructor (load map)
         public MapWindow(string tilemapPath)
         {
             InitializeComponent();
-            MessageBox.Show("chemin tilemap : "+ tilemapPath);
+            Left = 0;
+            Top = 0;
+            //MessageBox.Show("chemin tilemap : "+ tilemapPath);
         }
 
         // Map window constructor (new map)
         public MapWindow(int Width, int Height, int tileWidth, int tileHeight, int tileMargin, int tilePadding, string tilesetFile, string tilemapName, string tilemapPath)
         {
-            InitializeComponent();
+            InitializeComponent();            
 
             mapWidth = Width;
             mapHeight = Height;
@@ -94,6 +98,12 @@ namespace AtomixEditor
 
             // Add grid to window
             this.Content = myGrid;
+
+            // update location of the window
+            this.Left = 0;
+            this.Top = (SystemParameters.WorkArea.Bottom - this.Height) / 2;
+
+           
         }      
 
 
@@ -167,21 +177,26 @@ namespace AtomixEditor
 
             BitmapImage logo = new BitmapImage();
             logo.BeginInit();
-            logo.UriSource = new Uri(directory + "/char_kon.jpg", UriKind.Absolute);
+            logo.UriSource = new Uri(GetSelectedTile().Source.ToString(), UriKind.Absolute);
+            logo.SourceRect = GetSelectedRect();
             logo.EndInit();
 
-            img.Source = logo;            
+            img.Source = logo;
+
+            //img = GetSelectedTile();
+
             Grid.SetColumn(img, tileX);
             Grid.SetRow(img, tileY);
-            
+           
             // Run through all images already in the grid
             foreach (UIElement tile in myGrid.Children)
             {
                 // same location
-                if (Grid.GetRow(tile) == tileY && Grid.GetColumn(tile) == tileX)
+                if (Grid.GetRow(tile) == tileY && Grid.GetColumn(tile) == tileX)                
                 {
                     // if different image we delete the current one & print the new one
-                    if (((Image)tile).Source.ToString() != logo.UriSource.ToString())
+                    //if (((Image)tile).Source.ToString() != logo.UriSource.ToString())
+                    if (((Image)tile).Name.ToString() != img.Name.ToString())
                     {
                         myGrid.Children.Remove(tile);
                         myGrid.Children.Add(img);
@@ -231,6 +246,26 @@ namespace AtomixEditor
         private void ResetTile()
         {            
             myGrid.Children.Clear();
+        }
+
+        public void SetSelectedTile(Image img)
+        {
+            selectedTile = img;
+        }
+
+        public Image GetSelectedTile()
+        {
+            return selectedTile;
+        }
+
+        public void SetSelectedRect(Int32Rect rect)
+        {
+            selectedRect = rect;
+        }
+
+        public Int32Rect GetSelectedRect()
+        {
+            return selectedRect;
         }
     }
 }
