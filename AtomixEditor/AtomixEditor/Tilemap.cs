@@ -142,7 +142,7 @@ namespace AtomixEditor
 
         public string GetTilesetPath()
         {
-            return tilesetFile;
+            return tileset.getTilesetFile();
         }
 
         public int GetTileWidth()
