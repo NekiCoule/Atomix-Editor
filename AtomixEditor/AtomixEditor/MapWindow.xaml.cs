@@ -37,7 +37,6 @@ namespace AtomixEditor
         public MapWindow(string tilemapPath)
         {
             InitializeComponent();
-
             MessageBox.Show("chemin tilemap : "+ tilemapPath);
         }
 
@@ -115,13 +114,10 @@ namespace AtomixEditor
         /// Events
         /// </summary>
 
-        // Click in map window
-        
-
+        // Click in map window     
         private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            isLeftMouseDown = true;
-            
+            isLeftMouseDown = true;            
         }
 
         private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -130,18 +126,16 @@ namespace AtomixEditor
             isLeftMouseDown = false;
         }
 
-
-
         private void OnMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            //isRightMouseDown = true;
-            //EraseTile();
+            isRightMouseDown = true;
+            EraseTile();
         }
 
         private void OnMouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             EraseTile();
-            //isRightMouseDown = false;
+            isRightMouseDown = false;
         }
 
         private void OnMouseMove(object sender, MouseEventArgs e)
@@ -152,16 +146,15 @@ namespace AtomixEditor
             }
             if (isRightMouseDown)
             {
-                //EraseTile();
+                EraseTile();
             }
         }
 
         private void DrawTile()
         {
-            int tileX;
-            int tileY;
+            bool draw = true;
 
-            GetTilePosition(out tileX, out tileY);
+            GetTilePosition(out int tileX, out int tileY);
 
             Image img = new Image
             {
@@ -180,44 +173,35 @@ namespace AtomixEditor
             img.Source = logo;            
             Grid.SetColumn(img, tileX);
             Grid.SetRow(img, tileY);
-
-            if (myGrid.Children.Count == 0)
-            {
-                myGrid.Children.Add(img);                
-            }
-            else
-            {
-                foreach (UIElement tile in myGrid.Children)
-                {
-                    if (Grid.GetRow(tile) == tileY && Grid.GetColumn(tile) == tileX)
-                    {
-                        if (((System.Windows.Controls.Image)tile).Source.ToString() != logo.UriSource.ToString())
-                        {
-                            myGrid.Children.Add(img);
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        myGrid.Children.Add(img);
-                        break;
-                    }
-                }
-            }
-
             
-
-
-
-            //MessageBox.Show("position souris : X="+ posX + " Y="+ posY + " case "+ tileX + "-"+ tileY);
+            // Run through all images already in the grid
+            foreach (UIElement tile in myGrid.Children)
+            {
+                // same location
+                if (Grid.GetRow(tile) == tileY && Grid.GetColumn(tile) == tileX)
+                {
+                    // if different image we delete the current one & print the new one
+                    if (((Image)tile).Source.ToString() != logo.UriSource.ToString())
+                    {
+                        myGrid.Children.Remove(tile);
+                        myGrid.Children.Add(img);
+                    }
+                draw = false;
+                break;
+                }                
+            }
+            
+            // if nothing yet in the grid at desired location
+            if (draw)
+            {
+                myGrid.Children.Add(img);
+            }
         }
 
+        // Erase desired tile on map
         private void EraseTile()
         {
-            int tileX;
-            int tileY;
-
-            GetTilePosition(out tileX, out tileY);
+            GetTilePosition(out int tileX, out int tileY);
 
             foreach (UIElement control in myGrid.Children)
             {
@@ -227,7 +211,6 @@ namespace AtomixEditor
                     break;
                 }
             }
-
         }
 
         private void GetTilePosition(out int tileX, out int tileY)
@@ -244,9 +227,9 @@ namespace AtomixEditor
             tileY = posY / GetMapTileHeight();
         }
 
+        // Erase all
         private void ResetTile()
-        {
-            // Erase all
+        {            
             myGrid.Children.Clear();
         }
     }
