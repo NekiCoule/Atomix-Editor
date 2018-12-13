@@ -143,18 +143,19 @@ namespace AtomixEditor
             initDoc();
 
             XDocument doc = XDocument.Load(tilemapFile);
-
+            XNamespace name = doc.Root.GetDefaultNamespace();
 
             foreach (UIElement control in myGrid.Children)
             {
 
-                doc.Element("data").Add(
-                    new XElement("Tile",
-                        new XAttribute("row", Grid.GetRow(control)),
-                        new XAttribute("col", Grid.GetColumn(control)),
-                        new XAttribute("id", ((Image)control).Name.ToString())
-                    ) //end tile
-                ); //end data
+                var tile = new XElement("Tile",
+                    new XAttribute("row", Grid.GetRow(control)),
+                    new XAttribute("col", Grid.GetColumn(control)),
+                    new XAttribute("id", ((Image)control).Name.ToString())
+                ); //end tile
+
+                doc.Element(name + "data").Add(tile);
+
             }
 
             doc.Save(tilemapFile);
