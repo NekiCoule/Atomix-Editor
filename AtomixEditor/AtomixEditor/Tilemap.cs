@@ -255,6 +255,37 @@ namespace AtomixEditor
             return Map;
         }
 
+        public Grid loadTilesFromXML(Grid myGrid)
+        {
+            string tilemapFile = tilemapPath + @"\" + tilemapName + ".xml";
+
+            Grid rGrid = myGrid;
+
+            XDocument doc = XDocument.Load(tilemapFile);
+            XElement eMap = doc.Element("map");
+            XElement eLayer = eMap.Element("layer");
+            XElement eData = eLayer.Element("data");
+
+            // Save a list of <tile /> from the data node
+            IEnumerable<XElement> mapElem = from elem in eData.Elements()
+                                            select elem;
+            
+            // loop in all the tiles inside 
+            foreach (XElement e in mapElem)
+            {
+                IEnumerable<XAttribute> mapAtt = from att in e.Attributes()
+                                                 select att;
+                // loop in tile attributes
+                foreach (XAttribute a in mapAtt)
+                {
+
+                }
+            }
+
+
+            return rGrid;
+        }
+
         public int getMapWidth()        {   return mapWidth;    }
         public int getMapHeight()       {   return mapHeight;   }
         public string getTilemapPath()  {   return tilemapPath; }

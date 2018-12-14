@@ -78,13 +78,20 @@ namespace AtomixEditor
                 myGrid.RowDefinitions.Add(Row);
             }
 
+
+
             // Add grid to window
             this.Content = myGrid;
 
             // update location of the window
             this.Left = 0;
-            this.Top = (SystemParameters.WorkArea.Bottom - this.Height) / 2;           
+            this.Top = (SystemParameters.WorkArea.Bottom - this.Height) / 2;
+            
+
+
         }
+
+        
 
         /// <summary>
         /// Events
