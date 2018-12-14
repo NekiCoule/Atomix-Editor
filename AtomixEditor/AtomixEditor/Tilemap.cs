@@ -267,13 +267,13 @@ namespace AtomixEditor
             XElement eData = eLayer.Element("data");
 
             // Save a list of <tile /> from the data node
-            IEnumerable<XElement> mapElem = from elem in eData.Elements()
+            IEnumerable<XElement> tileNodes = from elem in eData.Elements()
                                             select elem;
             
             // loop in all the tiles inside 
-            foreach (XElement e in mapElem)
+            foreach (XElement tile in tileNodes)
             {
-                IEnumerable<XAttribute> mapAtt = from att in e.Attributes()
+                IEnumerable<XAttribute> tileAtt = from att in tile.Attributes()
                                                  select att;
                 // Saves the tile in the grid
             }
