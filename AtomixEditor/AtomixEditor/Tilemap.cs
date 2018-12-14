@@ -47,6 +47,58 @@ namespace AtomixEditor
         // Destructor
         ~Tilemap(){}
 
+
+
+        // Name : initFromXML
+        // Parameters: string (the full path of the xml file)
+        // Returns : bool
+        // Description : Load an XML file and save the values in the current object. The XML file must be well written!!
+
+        public bool initFromXML(string fullPath)
+        {
+            // Load the document
+            XDocument doc = XDocument.Load(fullPath);
+
+            // map node
+            XElement eMap = doc.Element("map");
+            IEnumerable<XAttribute> mapAtt = 
+                from att in eMap.Attributes()
+                select att;
+
+            // map attributes
+            mapWidth = int.Parse(mapAtt.ElementAt(0).Value);
+            mapHeight = int.Parse(mapAtt.ElementAt(1).Value);
+            tileWidth = int.Parse(mapAtt.ElementAt(2).Value);
+            tileHeight = int.Parse(mapAtt.ElementAt(3).Value);
+
+            // map/tileset node
+            XElement eTileset = eMap.Element("tileset");
+            mapAtt =
+                from att in eTileset.Attributes()
+                select att;
+
+            // map/tileset attributes
+            tileset = new Tileset(
+                int.Parse(mapAtt.ElementAt(1).Value),
+                int.Parse(mapAtt.ElementAt(2).Value),
+                int.Parse(mapAtt.ElementAt(3).Value),
+                int.Parse(mapAtt.ElementAt(4).Value),
+                ""
+                );
+
+            // map/tilset/image node
+            XElement eImage = eTileset.Element("image");
+            mapAtt =
+                from att in eImage.Attributes()
+                select att;
+
+            // map/tilset/image attributes
+            tileset.setFilePath(@mapAtt.ElementAt(0).Value);
+
+            return true;
+        }
+
+
         // Name: initDoc
         // Parameters: None
         // Returns: bool

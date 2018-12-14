@@ -38,11 +38,18 @@ namespace AtomixEditor
             FileDialog fileDialog = new OpenFileDialog();
             fileDialog.ShowDialog();
 
-            MapWindow Map = new MapWindow(fileDialog.FileName);
-            Map.Show();
-            //TilemapWindow tilemap = new TilemapWindow();
-            //tilemap.Show();
-            this.Close();
+            Tilemap theTilemap = new Tilemap();
+
+            if (theTilemap.initFromXML(fileDialog.FileName))
+            {
+                MapWindow Map = theTilemap.goToEditor();
+                Map.Show();
+                TilemapWindow tilemap = new TilemapWindow(Map, theTilemap.getTileset());
+                tilemap.Show();
+                ToolsWindow tools = new ToolsWindow(Map, theTilemap);
+                tools.Show();
+                this.Close();
+            }
         }
     }
 }

@@ -56,5 +56,10 @@ namespace AtomixEditor
         {
             return tilesetFile;
         }
+
+        public void setFilePath(string path)
+        {
+            tilesetFile = path;
+        }
 }
 }
