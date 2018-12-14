@@ -60,11 +60,12 @@ namespace AtomixEditor
 
             int tileHeight = theTileset.getElementHeight();
             int tileWidth = theTileset.getElementWidth();
+            int spacing = theTileset.getElementSpacing();
 
             BitmapImage tile = new BitmapImage();
             tile.BeginInit();
             tile.UriSource = new Uri(theTileset.getTilesetFile(), UriKind.Absolute);
-            tile.SourceRect = new Int32Rect(tileX * tileWidth, tileY * tileHeight , tileWidth, tileHeight);
+            tile.SourceRect = new Int32Rect(tileX * tileWidth + ((tileX+1) * spacing), tileY * tileHeight + ((tileY+1) * spacing), tileWidth, tileHeight);
             tile.EndInit();
 
             Image img = new Image
@@ -90,8 +91,11 @@ namespace AtomixEditor
             posY = (int)Mouse.GetPosition(this).Y;
 
             // To find which tile is clicked we divide mouse position by tile size
-            tileX = posX / theTileset.getElementWidth();
-            tileY = posY / theTileset.getElementHeight();
+            tileX = posX / (theTileset.getElementWidth() + theTileset.getElementSpacing());
+            tileY = posY / (theTileset.getElementHeight() + theTileset.getElementSpacing());
+
+            //tileX -= (tileX+1) * theTileset.getElementSpacing();
+            //tileY -= (tileY+1) * theTileset.getElementSpacing();
         }
 
         private void wdwTileset_Closing(object sender, System.ComponentModel.CancelEventArgs e)

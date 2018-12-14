@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Forms;
 
 namespace AtomixEditor
 {
@@ -35,7 +36,7 @@ namespace AtomixEditor
         // erase all tiles of the map
         private void btnResetClick(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Votre map sera réinitialisée, êtes-vous sûr ?", "Attention !", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            if (System.Windows.MessageBox.Show("Votre map sera réinitialisée, êtes-vous sûr ?", "Attention !", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
                 mapWindow.ResetMap();
             }                
@@ -44,13 +45,15 @@ namespace AtomixEditor
         // Saves data into XML
         private void btnSaveMapClick(object sender, RoutedEventArgs e)
         {
-            if (map.saveMap(MapWindow.getMapGrid())) { }
+            if (map.saveMap(MapWindow.getMapGrid())) { System.Windows.MessageBox.Show("Map enregitrée !"); }
         }
 
-        // TODO recharger image Tileset
-        private void btnLoadTilesetClick(object sender, RoutedEventArgs e)
+        private void btnSaveAsClick(object sender, RoutedEventArgs e)
         {
-            
+            FolderBrowserDialog folderDialog = new FolderBrowserDialog();
+            folderDialog.ShowDialog();
+
+            if (map.saveMap(MapWindow.getMapGrid(), folderDialog.SelectedPath)) { System.Windows.MessageBox.Show("Map enregitrée !"); }
         }
 
         private void btnExitClick(object sender, RoutedEventArgs e)
@@ -60,7 +63,7 @@ namespace AtomixEditor
 
         private void wdwTools_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (MessageBox.Show("Quitter l'éditeur sans sauvegarder ?", "Attention !", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            if (System.Windows.MessageBox.Show("Quitter l'éditeur sans sauvegarder ?", "Attention !", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
                 Environment.Exit(0);
             }
@@ -69,5 +72,7 @@ namespace AtomixEditor
                 e.Cancel = true;
             }
         }
+
+        
     }
 }

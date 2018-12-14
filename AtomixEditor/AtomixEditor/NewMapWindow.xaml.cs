@@ -72,7 +72,7 @@ namespace AtomixEditor
             }
             else
             {
-                System.Windows.Forms.MessageBox.Show("Merci de renseigner tous les champs");
+                System.Windows.MessageBox.Show("Merci de renseigner tous les champs");
             }
         }        
     }

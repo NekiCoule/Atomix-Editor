@@ -9,14 +9,14 @@
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                <GradientStop Color="#FF0F341D"/>
-                <GradientStop Color="#FF1C8844" Offset="1"/>
+                <GradientStop Color="#FF195077"/>
+                <GradientStop Color="#FF4C788E" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Button x:Name="btnSaveMap" Content="Enregister"  HorizontalAlignment="Left" Margin="31,23,0,0" VerticalAlignment="Top" Width="85" Click="btnSaveMapClick" Height="30"/>
-        <Button x:Name="btnLoadTileset" Content="Charger tileset" HorizontalAlignment="Left" Margin="153,23,0,0" VerticalAlignment="Top" Width="85" Click="btnLoadTilesetClick" Height="30"/>
-        <Button x:Name="btnResetmap" Content="RAZ" HorizontalAlignment="Left" Margin="31,85,0,0" VerticalAlignment="Top" Width="85" Click="btnResetClick" Height="29"/>
-        <Button x:Name="btnExit" Content="Quitter" HorizontalAlignment="Left" Margin="153,85,0,0" VerticalAlignment="Top" Width="85" Click="btnExitClick" Height="29"/>
+        <Button x:Name="btnSaveMap" Content="Enregister"  HorizontalAlignment="Left" Margin="17,23,0,0" VerticalAlignment="Top" Width="105" Click="btnSaveMapClick" Height="30"/>
+        <Button x:Name="btnSaveAs" Content="Enregistrer sous..." HorizontalAlignment="Left" Margin="146,23,0,0" VerticalAlignment="Top" Width="105" Click="btnSaveAsClick" Height="30"/>
+        <Button x:Name="btnResetmap" Content="RAZ" HorizontalAlignment="Left" Margin="17,85,0,0" VerticalAlignment="Top" Width="105" Click="btnResetClick" Height="29"/>
+        <Button x:Name="btnExit" Content="Quitter" HorizontalAlignment="Left" Margin="146,85,0,0" VerticalAlignment="Top" Width="105" Click="btnExitClick" Height="29"/>
 
     </Grid>
 </Window>

@@ -5,5 +5,5 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AtomixEditor"
         mc:Ignorable="d"
-        Title="MapWindow" Height="600" Width="800"
+        Title="Atomix Map Editor" Height="600" Width="800"
         MouseLeftButtonUp="OnMouseLeftButtonUp" Background="#FFC7C7C7" MouseLeftButtonDown="OnMouseLeftButtonDown" MouseMove="OnMouseMove" MouseRightButtonDown="OnMouseRightButtonDown" MouseRightButtonUp="OnMouseRightButtonUp" WindowStartupLocation="Manual" ResizeMode="CanMinimize" Closing="Window_Closing"/>
