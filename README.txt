@@ -34,7 +34,6 @@ Le mieux aurai été de créer une position relative à l'executable.
 
 Normalement, l'éditeur en lui même n'est pas bogué. Toutes les fonctionnalitées devraient être oppérationnels.
 Il n'y a pas encore de ctrl+Z.
-Si vous cliquez sur RAZ, aucun message d'alerte n'apparaîtra (c'est instantané, attention).
 Vous ne pouvez pas encore changer le nom du fichier avec un save as.
 Vous ne pouvez dessiner que sur un seul layer.
 Vous ne pouvez utiliser qu'une seule map par tilemap.
