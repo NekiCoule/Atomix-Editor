@@ -24,6 +24,11 @@ Il suffit de sélectionner un fichier XML crée par notre éditeur.
 Attention cependant, rien ne doit avoir été modifié dans l'ordre des attributs des balises!
 Si une seule modification a été effectuée dans la structure du XML, l'éditeur risque fortement de plenter.
 
+Un gros problème de cet éditeur: les fichiers XML ne peuvent par réellement être partagés.
+En effet, nous gèrons le chemin du tileset en fonction de l'ordinateur qui l'a crée.
+Il aurai fallu que nous chargions le tileset aussi pour resauvegarder sa postition.
+Le mieux aurai été de créer une position relative à l'executable.
+
 
 - EDITION
 
