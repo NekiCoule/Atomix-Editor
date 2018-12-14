@@ -275,11 +275,7 @@ namespace AtomixEditor
             {
                 IEnumerable<XAttribute> mapAtt = from att in e.Attributes()
                                                  select att;
-                // loop in tile attributes
-                foreach (XAttribute a in mapAtt)
-                {
-
-                }
+                // Saves the tile in the grid
             }
 
 
