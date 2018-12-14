@@ -61,11 +61,11 @@ namespace AtomixEditor
 
                 if (theTilemap.initDoc())
                 {
-                    MapWindow Map = theTilemap.goToEditor();
-                    Map.Show();
-                    TilemapWindow tilemap = new TilemapWindow(Map, theTilemap.getTileset());
-                    tilemap.Show();
-                    ToolsWindow tools = new ToolsWindow(Map, theTilemap);
+                    MapWindow mapWindow = theTilemap.goToEditor();
+                    mapWindow.Show();
+                    TilemapWindow tilemapWindow = new TilemapWindow(mapWindow, theTilemap.getTileset());
+                    tilemapWindow.Show();
+                    ToolsWindow tools = new ToolsWindow(mapWindow, tilemapWindow, theTilemap);
                     tools.Show();
                     this.Close();
                 }

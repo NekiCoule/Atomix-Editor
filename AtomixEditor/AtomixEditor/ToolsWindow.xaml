@@ -1,15 +1,22 @@
-﻿<Window x:Class="AtomixEditor.ToolsWindow"
+﻿<Window x:Name="wdwTools" x:Class="AtomixEditor.ToolsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AtomixEditor"
         mc:Ignorable="d"
-        Title="ToolsWindow" Height="141.946" Width="421.477">
+        Title="Tools" Height="160.746" Width="275.344" ResizeMode="CanMinimize" Closing="wdwTools_Closing">
     <Grid>
-        <Button x:Name="btnSaveMap" Content="Enregister"  HorizontalAlignment="Left" Margin="45,50,0,0" VerticalAlignment="Top" Width="75" Click="BtnSaveMapClick"/>
-        <Button x:Name="btnLoadTileset" Content="Charger tileset" HorizontalAlignment="Left" Margin="143,50,0,0" VerticalAlignment="Top" Width="89" Click="BtnLoadTilesetClick"/>
-        <Button x:Name="btnResetmap" Content="RAZ" HorizontalAlignment="Left" Margin="253,50,0,0" VerticalAlignment="Top" Width="75" Click="BtnResetClick"/>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                <GradientStop Color="#FF0F341D"/>
+                <GradientStop Color="#FF1C8844" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Button x:Name="btnSaveMap" Content="Enregister"  HorizontalAlignment="Left" Margin="31,23,0,0" VerticalAlignment="Top" Width="85" Click="btnSaveMapClick" Height="30"/>
+        <Button x:Name="btnLoadTileset" Content="Charger tileset" HorizontalAlignment="Left" Margin="153,23,0,0" VerticalAlignment="Top" Width="85" Click="btnLoadTilesetClick" Height="30"/>
+        <Button x:Name="btnResetmap" Content="RAZ" HorizontalAlignment="Left" Margin="31,85,0,0" VerticalAlignment="Top" Width="85" Click="btnResetClick" Height="29"/>
+        <Button x:Name="btnExit" Content="Quitter" HorizontalAlignment="Left" Margin="153,85,0,0" VerticalAlignment="Top" Width="85" Click="btnExitClick" Height="29"/>
 
     </Grid>
 </Window>

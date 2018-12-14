@@ -19,32 +19,58 @@ namespace AtomixEditor
     /// </summary>
     public partial class ToolsWindow : Window
     {
-        private MapWindow theMap;
+        private MapWindow mapWindow;
+        private TilemapWindow tilemapWindow;
         private Tilemap map;
 
-        public ToolsWindow(MapWindow myMap, Tilemap myTilemap)
+        public ToolsWindow(MapWindow myMapWindow, TilemapWindow myTilemapWindow, Tilemap myTilemap)
         {
             InitializeComponent();
-            theMap = myMap;
+
+            mapWindow = myMapWindow;
+            tilemapWindow = myTilemapWindow;
             map = myTilemap;
+            this.Left = SystemParameters.WorkArea.Width - this.Width;
+            this.Top = 0;
         }
 
-        private void BtnResetClick(object sender, RoutedEventArgs e)
+        // erase all tiles of the map
+        private void btnResetClick(object sender, RoutedEventArgs e)
         {
-            theMap.ResetMap();
+            if (MessageBox.Show("Votre map sera réinitialisée, êtes-vous sûr ?", "Attention !", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            {
+                mapWindow.ResetMap();
+            }                
         }
 
-
-        // TODO charger info dans XML
-        private void BtnSaveMapClick(object sender, RoutedEventArgs e)
+        // Saves data into XML
+        private void btnSaveMapClick(object sender, RoutedEventArgs e)
         {
             if (map.saveMap(MapWindow.getMapGrid())) { }
         }
 
         // TODO recharger image Tileset
-        private void BtnLoadTilesetClick(object sender, RoutedEventArgs e)
+        private void btnLoadTilesetClick(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void btnExitClick(object sender, RoutedEventArgs e)
+        {
+           this.Close();
+        }
+
+        private void wdwTools_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (MessageBox.Show("Quitter l'éditeur sans sauvegarder ?", "Attention !", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            {
+                mapWindow.Close();
+                tilemapWindow.Close();                
+            }
+            else
+            {
+                e.Cancel = true;
+            }
         }
     }
 }
