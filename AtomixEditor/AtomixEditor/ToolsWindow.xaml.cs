@@ -20,15 +20,13 @@ namespace AtomixEditor
     public partial class ToolsWindow : Window
     {
         private MapWindow mapWindow;
-        private TilemapWindow tilemapWindow;
         private Tilemap map;
 
-        public ToolsWindow(MapWindow myMapWindow, TilemapWindow myTilemapWindow, Tilemap myTilemap)
+        public ToolsWindow(MapWindow myMapWindow, Tilemap myTilemap)
         {
             InitializeComponent();
 
             mapWindow = myMapWindow;
-            tilemapWindow = myTilemapWindow;
             map = myTilemap;
             this.Left = SystemParameters.WorkArea.Width - this.Width;
             this.Top = 0;
@@ -64,8 +62,7 @@ namespace AtomixEditor
         {
             if (MessageBox.Show("Quitter l'éditeur sans sauvegarder ?", "Attention !", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
-                mapWindow.Close();
-                tilemapWindow.Close();                
+                Environment.Exit(0);
             }
             else
             {

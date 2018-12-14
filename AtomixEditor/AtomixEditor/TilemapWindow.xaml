@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AtomixEditor"
         mc:Ignorable="d"
-        Title="Tileset" Height="320" Width="320" WindowStartupLocation="Manual" ResizeMode="CanMinimize">
+        Title="Tileset" Height="320" Width="320" WindowStartupLocation="Manual" ResizeMode="CanMinimize" Closing="wdwTileset_Closing">
 
     <Grid x:Name="tilesetGrid" MouseLeftButtonUp="OnMouseLeftButtonUp">     
 

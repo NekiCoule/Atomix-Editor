@@ -21,6 +21,7 @@ namespace AtomixEditor
     {
         private Tileset theTileset;
         private MapWindow theMap;
+        //private ToolsWindow toolsWindow;
 
         public TilemapWindow(MapWindow map, Tileset myTileset)
         {
@@ -91,6 +92,19 @@ namespace AtomixEditor
             // To find which tile is clicked we divide mouse position by tile size
             tileX = posX / theTileset.getElementWidth();
             tileY = posY / theTileset.getElementHeight();
+        }
+
+        private void wdwTileset_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+            if (MessageBox.Show("Quitter l'éditeur sans sauvegarder ?", "Attention !", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            {
+                Environment.Exit(0);
+            }
+            else
+            {
+                e.Cancel = true;
+            }
         }
     }
 }
