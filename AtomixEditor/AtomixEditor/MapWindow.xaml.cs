@@ -248,11 +248,20 @@ namespace AtomixEditor
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (MessageBox.Show("Quitter l'éditeur sans sauvegarder ?", "Attention !", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            MessageBoxResult answer;
+
+            answer = MessageBox.Show("Sauvegarder avant de quitter ?", "Attention !", MessageBoxButton.YesNoCancel);
+
+            if (answer == MessageBoxResult.Yes)
+            {
+                if (map.saveMap(getMapGrid())) { MessageBox.Show("Map enregitrée !"); }
+                Environment.Exit(0);
+            }
+            else if (answer == MessageBoxResult.No)
             {
                 Environment.Exit(0);
             }
-            else
+            else if (answer == MessageBoxResult.Cancel)
             {
                 e.Cancel = true;
             }

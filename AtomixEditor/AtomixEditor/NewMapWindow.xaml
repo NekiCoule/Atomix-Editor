@@ -42,9 +42,9 @@
         <TextBox x:Name="txtElementHeight" HorizontalAlignment="Left" Height="23" Margin="523,135,0,0" TextWrapping="Wrap" Text="32" VerticalAlignment="Top" Width="89" RenderTransformOrigin="3.046,2.568" MaxLength="2"/>
 
         <Label x:Name="lblMargin" Content="Margin :" HorizontalAlignment="Left" Margin="622,83,0,0" VerticalAlignment="Top" Height="32" Width="84"/>
-        <TextBox x:Name="txtMargin" HorizontalAlignment="Left" Height="23" Margin="683,84,0,0" TextWrapping="Wrap" Text="2" VerticalAlignment="Top" Width="89" MaxLength="2"/>
+        <TextBox x:Name="txtMargin" HorizontalAlignment="Left" Height="23" Margin="683,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="89" MaxLength="2"/>
         <Label x:Name="lblSpacing" Content="Spacing :" HorizontalAlignment="Left" Margin="622,131,0,0" VerticalAlignment="Top" Height="32" Width="84"/>
-        <TextBox x:Name="txtSpacing" HorizontalAlignment="Left" Height="23" Margin="683,135,0,0" TextWrapping="Wrap" Text="2" VerticalAlignment="Top" Width="89" RenderTransformOrigin="3.046,2.568" MaxLength="2"/>
+        <TextBox x:Name="txtSpacing" HorizontalAlignment="Left" Height="23" Margin="683,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="89" RenderTransformOrigin="3.046,2.568" MaxLength="2"/>
        
         <Label x:Name="lblTilesetFile" Content="Tileset :" HorizontalAlignment="Left" Margin="455,208,0,0" VerticalAlignment="Top" Height="32" Width="61"/>
         <TextBox x:Name="txtTilesetFile" HorizontalAlignment="Left" Height="19" Margin="521,211,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="228"/>

@@ -63,16 +63,23 @@ namespace AtomixEditor
 
         private void wdwTools_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (System.Windows.MessageBox.Show("Quitter l'éditeur sans sauvegarder ?", "Attention !", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            MessageBoxResult answer;
+
+            answer = System.Windows.MessageBox.Show("Sauvegarder avant de quitter ?", "Attention !", MessageBoxButton.YesNoCancel);
+
+            if (answer == MessageBoxResult.Yes)
+            {
+                if (map.saveMap(MapWindow.getMapGrid())) { System.Windows.MessageBox.Show("Map enregitrée !"); }
+                Environment.Exit(0);
+            }
+            else if (answer == MessageBoxResult.No)
             {
                 Environment.Exit(0);
             }
-            else
+            else if(answer == MessageBoxResult.Cancel)
             {
                 e.Cancel = true;
             }
-        }
-
-        
+        }        
     }
 }
