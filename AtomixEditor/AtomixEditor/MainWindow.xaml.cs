@@ -16,9 +16,6 @@ using System.Windows.Forms;
 
 namespace AtomixEditor
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -26,6 +23,7 @@ namespace AtomixEditor
             InitializeComponent();
         }
 
+        // Create a new tilemap
         private void BtnNewMap_Click(object sender, RoutedEventArgs e)
         {
             NewMapWindow newMap = new NewMapWindow();           
@@ -33,8 +31,10 @@ namespace AtomixEditor
             this.Close();
         }
 
+        // Load an existing tilemap
         private void BtnLoadMap_Click(object sender, RoutedEventArgs e)
         {
+            // Choose the tilemap file
             FileDialog fileDialog = new OpenFileDialog();
             fileDialog.ShowDialog();
 

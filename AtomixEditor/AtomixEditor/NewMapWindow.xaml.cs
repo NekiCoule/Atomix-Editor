@@ -17,9 +17,6 @@ using System.Xml.Linq;
 
 namespace AtomixEditor
 {
-    /// <summary>
-    /// Logique d'interaction pour NewMapWindow.xaml
-    /// </summary>
     public partial class NewMapWindow : Window
     {
         public NewMapWindow()

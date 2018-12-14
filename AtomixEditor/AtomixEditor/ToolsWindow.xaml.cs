@@ -15,9 +15,6 @@ using System.Windows.Forms;
 
 namespace AtomixEditor
 {
-    /// <summary>
-    /// Logique d'interaction pour ToolsWindow.xaml
-    /// </summary>
     public partial class ToolsWindow : Window
     {
         private MapWindow mapWindow;
@@ -48,6 +45,7 @@ namespace AtomixEditor
             if (map.saveMap(MapWindow.getMapGrid())) { System.Windows.MessageBox.Show("Map enregitrée !"); }
         }
 
+        // Saves data into XML at selected location
         private void btnSaveAsClick(object sender, RoutedEventArgs e)
         {
             FolderBrowserDialog folderDialog = new FolderBrowserDialog();
@@ -56,11 +54,13 @@ namespace AtomixEditor
             if (map.saveMap(MapWindow.getMapGrid(), folderDialog.SelectedPath)) { System.Windows.MessageBox.Show("Map enregitrée !"); }
         }
 
+        // Exit app
         private void btnExitClick(object sender, RoutedEventArgs e)
         {
            this.Close();
         }
 
+        // Close all windows, save possible before close
         private void wdwTools_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             MessageBoxResult answer;

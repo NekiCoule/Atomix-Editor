@@ -14,14 +14,10 @@ using System.Windows.Shapes;
 
 namespace AtomixEditor
 {
-    /// <summary>
-    /// Logique d'interaction pour TilemapWindow.xaml
-    /// </summary>
     public partial class TilemapWindow : Window
     {
         private Tileset theTileset;
         private MapWindow theMap;
-        //private ToolsWindow toolsWindow;
 
         public TilemapWindow(MapWindow map, Tileset myTileset)
         {
@@ -29,8 +25,7 @@ namespace AtomixEditor
             
             theTileset = myTileset;
             theMap = map;
-
-            // load tileset into the editor right-side window
+            
             string directory = System.IO.Directory.GetCurrentDirectory();            
 
             BitmapImage tileset = new BitmapImage();
@@ -46,6 +41,7 @@ namespace AtomixEditor
 
             img.Source = tileset;
 
+            // load tileset into the editor right-side window
             this.tilesetGrid.Children.Add(img);
 
             this.Height = tileset.PixelHeight + 35;
@@ -54,6 +50,7 @@ namespace AtomixEditor
             this.Top = (SystemParameters.WorkArea.Bottom - this.Height) / 2;
         }
 
+        // on click we create image of 1 tile
         private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             GetTilePosition(out int tileX, out int tileY);
@@ -90,12 +87,9 @@ namespace AtomixEditor
             posX = (int)Mouse.GetPosition(this).X;
             posY = (int)Mouse.GetPosition(this).Y;
 
-            // To find which tile is clicked we divide mouse position by tile size
+            // To find which tile is clicked we divide mouse position by tile size + spacing
             tileX = posX / (theTileset.getElementWidth() + theTileset.getElementSpacing());
             tileY = posY / (theTileset.getElementHeight() + theTileset.getElementSpacing());
-
-            //tileX -= (tileX+1) * theTileset.getElementSpacing();
-            //tileY -= (tileY+1) * theTileset.getElementSpacing();
         }
 
         private void wdwTileset_Closing(object sender, System.ComponentModel.CancelEventArgs e)

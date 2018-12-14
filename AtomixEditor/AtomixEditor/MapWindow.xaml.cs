@@ -14,10 +14,6 @@ using System.Windows.Shapes;
 
 namespace AtomixEditor
 {
-    /// <summary>
-    /// Logique d'interaction pour MapWindow.xaml
-    /// </summary>
-
     public partial class MapWindow : Window
     {
         private static Grid myGrid;
@@ -40,11 +36,10 @@ namespace AtomixEditor
         {
             InitializeComponent();
 
-            map = myTilemap;         
-
+            map = myTilemap; 
+            
             int windowWidth = myTilemap.getMapWidth() * myTilemap.getTileWidth();
             int windowHeight = myTilemap.getMapHeight() * myTilemap.getTileHeight();
-            
 
             // Define window size (add some pixels for width and height for the grid to fit the screen)
             this.Width = windowWidth + 15;
@@ -144,52 +139,53 @@ namespace AtomixEditor
             bool draw = true;
 
             GetTilePosition(out int tileX, out int tileY);
-            
-            Image img = new Image
+
+            // Try, to prevent crash if no tile selected from tileset 
+            try
             {
-                Width = map.getTileWidth(),
-                Height = map.getTileHeight()
-            };
-
-            // Get current folder
-            string directory = System.IO.Directory.GetCurrentDirectory();            
-
-            // Create a bitmad with selected tiled
-            BitmapImage logo = new BitmapImage();
-            logo.BeginInit();
-            logo.UriSource = new Uri(GetSelectedTile().Source.ToString(), UriKind.Absolute);
-            logo.SourceRect = GetSelectedRect();
-            logo.EndInit();
-
-            img.Source = logo;
-            img.Name = GetSelectedTile().Name;
-
-            //img = GetSelectedTile();
-
-            Grid.SetColumn(img, tileX);
-            Grid.SetRow(img, tileY);
-           
-            // Run through all images already in the grid
-            foreach (UIElement tile in myGrid.Children)
-            {
-                // same location
-                if (Grid.GetRow(tile) == tileY && Grid.GetColumn(tile) == tileX)                
+                Image img = new Image
                 {
-                    // if different image we delete the current one & print the new one
-                    if (((Image)tile).Name.ToString() != img.Name.ToString())
+                    Width = map.getTileWidth(),
+                    Height = map.getTileHeight()
+                };
+
+                // Get current folder
+                string directory = System.IO.Directory.GetCurrentDirectory();
+
+                // Create a bitmad with selected tiled
+                BitmapImage logo = new BitmapImage();
+                logo.BeginInit();            
+                logo.UriSource = new Uri(GetSelectedTile().Source.ToString(), UriKind.Absolute); 
+                logo.SourceRect = GetSelectedRect();
+                logo.EndInit();
+
+                img.Source = logo;
+                img.Name = GetSelectedTile().Name;
+
+                Grid.SetColumn(img, tileX);
+                Grid.SetRow(img, tileY);
+
+                // Run through all images already in the grid
+                foreach (UIElement tile in myGrid.Children)
+                {
+                    // if same location we do nothing
+                    if (Grid.GetRow(tile) == tileY && Grid.GetColumn(tile) == tileX)
                     {
                         draw = false;
                         break;
                     }
-                    draw = false;
-                    break;
-                }                
+                }
+
+                // if nothing yet in the grid at desired location
+                if (draw)
+                {
+                    myGrid.Children.Add(img);
+                }
             }
-            
-            // if nothing yet in the grid at desired location
-            if (draw)
+            catch
             {
-                myGrid.Children.Add(img);
+                isLeftMouseDown = false;
+                MessageBox.Show(this, "Veuillez d'abord choisir une tile du tileset");
             }
         }
 
@@ -253,6 +249,8 @@ namespace AtomixEditor
             return myGrid;
         }
 
+
+        // Close all windows, save possible before close
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             MessageBoxResult answer;
