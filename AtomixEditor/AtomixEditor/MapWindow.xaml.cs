@@ -152,7 +152,7 @@ namespace AtomixEditor
                 // Create a bitmad with selected tiled
                 BitmapImage logo = new BitmapImage();
                 logo.BeginInit();            
-                logo.UriSource = new Uri(GetSelectedTile().Source.ToString(), UriKind.Relative); 
+                logo.UriSource = new Uri(GetSelectedTile().Source.ToString(), UriKind.Absolute); 
                 logo.SourceRect = GetSelectedRect();
                 logo.EndInit();
 
