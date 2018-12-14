@@ -7,13 +7,19 @@
         mc:Ignorable="d"
         Title="Atomix Editor" Height="450" Width="800" VerticalAlignment="Center" HorizontalAlignment="Center">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="251*"/>
+            <RowDefinition Height="168*"/>
+        </Grid.RowDefinitions>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="#FF102E40"/>
                 <GradientStop Color="#FF3384B6" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Button x:Name="btnNewMap" Content="Nouvelle map" HorizontalAlignment="Left" Margin="295,106,0,0" VerticalAlignment="Top" Width="190" Height="70" FontSize="14" FontWeight="Bold" Click="BtnNewMap_Click"/>
-        <Button x:Name="btnLoadMap" Content="Charger un map" HorizontalAlignment="Left" Margin="295,239,0,0" VerticalAlignment="Top" Width="190" Height="70" FontSize="14" FontWeight="Bold" Click="BtnLoadMap_Click"/>
+        <Button x:Name="btnNewMap" Content="Nouvelle map" HorizontalAlignment="Left" Margin="101,176,0,0" VerticalAlignment="Top" Width="190" Height="70" FontSize="14" FontWeight="Bold" Click="BtnNewMap_Click"/>
+        <Button x:Name="btnLoadMap" Content="Charger un map" HorizontalAlignment="Left" Margin="519,176,0,0" VerticalAlignment="Top" Width="190" Height="70" FontSize="14" FontWeight="Bold" Click="BtnLoadMap_Click"/>
+        <Label Content="Atomix Editor" HorizontalAlignment="Left" Margin="90,43,0,0" VerticalAlignment="Top" FontFamily="Snap ITC" FontSize="72" FontWeight="Bold" Foreground="#FF8CFBAA"/>
+        <Label Content="By Vincent MAGINOT and Max WEBER" HorizontalAlignment="Left" Margin="570,131.54,0,0" VerticalAlignment="Top" Grid.Row="1"/>
     </Grid>
 </Window>
