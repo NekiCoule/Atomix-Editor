@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Xml;
 using System.Xml.Linq;
+using System.Windows.Media.Imaging;
 
 namespace AtomixEditor
 {
@@ -70,6 +71,8 @@ namespace AtomixEditor
             mapHeight = int.Parse(mapAtt.ElementAt(1).Value);
             tileWidth = int.Parse(mapAtt.ElementAt(2).Value);
             tileHeight = int.Parse(mapAtt.ElementAt(3).Value);
+            tilemapPath = System.IO.Path.GetDirectoryName(fullPath);
+            tilemapName = System.IO.Path.GetFileNameWithoutExtension(fullPath);
 
             // map/tileset node
             XElement eTileset = eMap.Element("tileset");
@@ -258,6 +261,9 @@ namespace AtomixEditor
         public Grid loadTilesFromXML(Grid myGrid)
         {
             string tilemapFile = tilemapPath + @"\" + tilemapName + ".xml";
+            int tileX;
+            int tileY;
+            string tileCoord;
 
             Grid rGrid = myGrid;
 
@@ -275,7 +281,53 @@ namespace AtomixEditor
             {
                 IEnumerable<XAttribute> tileAtt = from att in tile.Attributes()
                                                  select att;
-                // Saves the tile in the grid
+                // Saves the tile in the grid                
+                tileY = int.Parse(tileAtt.ElementAt(0).Value);
+                tileX = int.Parse(tileAtt.ElementAt(1).Value);
+                tileCoord = tileAtt.ElementAt(2).Value;
+                int tileCoordX;
+                int tileCoordY;
+
+                if (tileCoord[2].ToString() == "Y")
+                {
+                    tileCoordX = int.Parse(tileCoord[1].ToString());
+                    if (tileCoord.ToString().Length == 5)
+                    {
+                        tileCoordY = int.Parse(tileCoord[3].ToString() + tileCoord[4].ToString());
+                    }
+                    else tileCoordY = int.Parse(tileCoord[3].ToString());
+                }
+                else
+                {
+                    tileCoordX = int.Parse(tileCoord[1].ToString() + tileCoord[2].ToString());
+                    if (tileCoord.ToString().Length == 6)
+                    {
+                        tileCoordY = int.Parse(tileCoord[4].ToString() + tileCoord[5].ToString());
+                    }
+                    else tileCoordY = int.Parse(tileCoord[4].ToString());
+                }
+                
+
+                Image img = new Image
+                {
+                    Width = getTileWidth(),
+                    Height = getTileHeight()
+                };
+
+                BitmapImage tileBmp = new BitmapImage();
+                tileBmp.BeginInit();
+                tileBmp.UriSource = new Uri(getTileset().getTilesetFile().ToString(), UriKind.Absolute);
+                tileBmp.SourceRect = new Int32Rect(tileCoordX * tileset.getElementWidth() + ((tileCoordX + 1) * tileset.getElementSpacing()), tileCoordY * tileset.getElementHeight() + ((tileCoordY + 1) * tileset.getElementSpacing()), tileset.getElementWidth(), tileset.getElementHeight());
+                tileBmp.EndInit();
+
+                Grid.SetColumn(img, tileX);
+                Grid.SetRow(img, tileY);
+
+                img.Source = tileBmp;
+                img.Name = tileCoord;
+
+                myGrid.Children.Add(img);
+
             }
 
 

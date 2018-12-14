@@ -73,7 +73,7 @@ namespace AtomixEditor
                 myGrid.RowDefinitions.Add(Row);
             }
 
-
+            myGrid = map.loadTilesFromXML(myGrid);
 
             // Add grid to window
             this.Content = myGrid;
@@ -81,9 +81,6 @@ namespace AtomixEditor
             // update location of the window
             this.Left = 0;
             this.Top = (SystemParameters.WorkArea.Bottom - this.Height) / 2;
-            
-
-
         }
 
         
@@ -155,7 +152,7 @@ namespace AtomixEditor
                 // Create a bitmad with selected tiled
                 BitmapImage logo = new BitmapImage();
                 logo.BeginInit();            
-                logo.UriSource = new Uri(GetSelectedTile().Source.ToString(), UriKind.Absolute); 
+                logo.UriSource = new Uri(GetSelectedTile().Source.ToString(), UriKind.Relative); 
                 logo.SourceRect = GetSelectedRect();
                 logo.EndInit();
 
