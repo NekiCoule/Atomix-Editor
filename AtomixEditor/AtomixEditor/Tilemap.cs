@@ -166,6 +166,37 @@ namespace AtomixEditor
             return true;
         }
 
+        public bool saveMap(Grid myGrid, string newPath)
+        {
+            tilemapPath = newPath;
+            string tilemapFile = tilemapPath + @"\" + tilemapName + ".xml";
+
+            initDoc();
+
+            XDocument doc = XDocument.Load(tilemapFile);
+            XElement map = doc.Element("map");
+            XElement layer = map.Element("layer");
+            XElement data = layer.Element("data");
+
+            foreach (UIElement control in myGrid.Children)
+            {
+
+                var tile = new XElement("Tile",
+                    new XAttribute("row", Grid.GetRow(control)),
+                    new XAttribute("col", Grid.GetColumn(control)),
+                    new XAttribute("id", ((Image)control).Name.ToString())
+                ); //end tile
+
+                data.Add(tile);
+
+            }
+
+            doc.Save(tilemapFile);
+
+
+            return true;
+        }
+
         public MapWindow goToEditor()
         {
             MapWindow Map = new MapWindow(this);
